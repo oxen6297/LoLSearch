@@ -76,4 +76,5 @@ dependencies {
     implementation(libs.androidx.datastore)
     implementation(libs.lottie)
     implementation(libs.bumptech.glide)
+    implementation(libs.androidx.navigation)
 }

@@ -17,6 +17,7 @@ retrofit = "2.11.0"
 hilt = "2.48"
 timber = "4.7.1"
 datastore = "1.1.1"
+navigation = "2.7.7"
 
 lottie = "6.4.0"
 httpLogging = "4.12.0"
@@ -40,6 +41,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
@@ -48,6 +50,7 @@ room-android = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-copmiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
+#noinspection SimilarGradleDependency
 retrofit-android = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 jake-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
@@ -55,6 +58,7 @@ lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie"
 retrofit-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "httpLogging" }
 
 androidx-datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+#noinspection SimilarGradleDependency
 moshi = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "moshi" }
 moshi-converter = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshiKotlin" }

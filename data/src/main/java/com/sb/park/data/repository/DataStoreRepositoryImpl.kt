@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class DataStoreRepositoryImpl @Inject constructor(private val dataStore: DataStore<Preferences>) :
+internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore: DataStore<Preferences>) :
     DataStoreRepository {
 
     override suspend fun saveVersion(version: String) {

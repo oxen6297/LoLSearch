@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class VersionRepositoryImpl @Inject constructor(
+internal class VersionRepositoryImpl @Inject constructor(
     private val dataDragonService: DataDragonService,
     private val dataStoreRepository: DataStoreRepository
 ) : VersionRepository {

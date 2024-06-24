@@ -2,9 +2,13 @@ package com.sb.park.data.service
 
 import com.sb.park.data.model.datadragon.DataDragonModel
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface DataDragonService {
 
-    @GET("14.12.1/data/ko_KR/champion.json")
-    fun<T> getChampion(): DataDragonModel<T>
+    @GET("api/versions.json")
+    fun getVersion(): List<String>
+
+    @GET("cdn/{lol_version}/data/ko_KR/champion.json")
+    fun <T> getChampion(@Path("lol_version") version: String): DataDragonModel<T>
 }

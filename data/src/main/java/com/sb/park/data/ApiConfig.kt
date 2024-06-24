@@ -1,10 +1,10 @@
 package com.sb.park.data
 
 object DataDragon {
-    const val CHAMPION_BASE_URL = "https://ddragon.leagueoflegends.com/cdn/"
+    const val CHAMPION_BASE_URL = "https://ddragon.leagueoflegends.com/"
 
-//버전: 14.12.1
-
+//버전: "https://ddragon.leagueoflegends.com/api/versions.json"
+//
 //챔피언: "https://ddragon.leagueoflegends.com/cdn/10.6.1/data/ko_KR/champion.json"
 //
 //스킬:  "http://ddragon.leagueoflegends.com/cdn/10.6.1/img/spell/<champion_name><Q/W/E/R>.png"

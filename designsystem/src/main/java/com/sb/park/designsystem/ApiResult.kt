@@ -1,8 +1,10 @@
 package com.sb.park.designsystem
 
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 
 sealed class ApiResult<out T> {
@@ -19,4 +21,4 @@ inline fun <T> safeFlow(crossinline service: suspend () -> T): Flow<ApiResult<T>
     }.catch {
         it.printStackTrace()
         emit(ApiResult.Error(it))
-    }
+    }.flowOn(Dispatchers.IO)

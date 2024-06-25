@@ -6,6 +6,6 @@ import com.squareup.moshi.JsonClass
 
 @Entity
 @JsonClass(generateAdapter = true)
-data class DataDragonModel<T>(
+data class DataDragonResponse<T>(
     @field:Json(name = "data") val data: Map<String, T>
 )

@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 
 @Entity
 @JsonClass(generateAdapter = true)
-data class ChampionModel(
+data class ChampionResponse(
     @field:Json(name = "id") @PrimaryKey val id: String,
     @field:Json(name = "name") val name: String
 )

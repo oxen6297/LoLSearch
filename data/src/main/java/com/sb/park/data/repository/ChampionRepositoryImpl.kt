@@ -1,9 +1,11 @@
 package com.sb.park.data.repository
 
-import com.sb.park.data.model.datadragon.ChampionModel
+import com.sb.park.data.mapper.toData
+import com.sb.park.data.model.datadragon.ChampionResponse
 import com.sb.park.data.service.DataDragonService
 import com.sb.park.designsystem.ApiResult
 import com.sb.park.designsystem.safeFlow
+import com.sb.park.model.ChampionModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
@@ -15,6 +17,8 @@ internal class ChampionRepositoryImpl @Inject constructor(
 
     override fun fetchChampion(): Flow<ApiResult<List<ChampionModel>>> = safeFlow {
         val version = dataStoreRepository.getVersion.first()
-        dataDragonService.getChampion<ChampionModel>(version).data.values.toList()
+        dataDragonService.getChampion<ChampionResponse>(version).data.values.map {
+            it.toData()
+        }.toList()
     }
 }

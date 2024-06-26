@@ -19,7 +19,7 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
     }
 
     override val getVersion: Flow<String> = dataStore.data.map {
-        it[VERSION] ?: "14.12.1"
+        it[VERSION] ?: DEFAULT_VERSION
     }
 
     override suspend fun saveIsDarkTheme(isDarkTheme: Boolean) {
@@ -33,6 +33,7 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
     }
 
     companion object {
+        private const val DEFAULT_VERSION = "14.13.1"
         private val VERSION = stringPreferencesKey("LOL_VERSION")
         private val IS_DARK_THEME = booleanPreferencesKey("IS_DARK_THEME")
     }

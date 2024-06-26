@@ -1,4 +1,4 @@
-package com.sb.park.lol.ui.theme
+package com.sb.park.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

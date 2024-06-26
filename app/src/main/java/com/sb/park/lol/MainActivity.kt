@@ -19,7 +19,7 @@ import com.sb.park.lol.navigation.BottomNavigation
 import com.sb.park.lol.screen.DictionaryScreen
 import com.sb.park.lol.screen.SearchScreen
 import com.sb.park.lol.screen.SettingScreen
-import com.sb.park.lol.ui.theme.LoLSearchTheme
+import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.viewmodels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 

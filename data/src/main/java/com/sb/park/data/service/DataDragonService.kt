@@ -7,8 +7,8 @@ import retrofit2.http.Path
 interface DataDragonService {
 
     @GET("api/versions.json")
-    fun getVersion(): List<String>
+    suspend fun getVersion(): List<String>
 
     @GET("cdn/{lol_version}/data/ko_KR/champion.json")
-    fun <T> getChampion(@Path("lol_version") version: String): DataDragonResponse<T>
+    suspend fun <T> getChampion(@Path("lol_version") version: String): DataDragonResponse<T>
 }

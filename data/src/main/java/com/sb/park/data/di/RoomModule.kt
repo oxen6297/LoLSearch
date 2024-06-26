@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.sb.park.data.room.ChampionDao
 import com.sb.park.data.room.LOLDataBase
-import com.sb.park.data.room.ListTypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -26,20 +25,14 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(
+    fun provideLoLDatabase(
         @ApplicationContext context: Context,
-        listTypeConverter: ListTypeConverter,
     ): LOLDataBase = Room
         .databaseBuilder(context, LOLDataBase::class.java, "LOL.db")
         .fallbackToDestructiveMigration()
-        .addTypeConverter(listTypeConverter)
         .build()
 
     @Provides
     @Singleton
     fun provideChampionDao(lolDataBase: LOLDataBase): ChampionDao = lolDataBase.championDao()
-
-    @Provides
-    @Singleton
-    fun provideStringListTypeConverter(moshi: Moshi): ListTypeConverter = ListTypeConverter(moshi)
 }

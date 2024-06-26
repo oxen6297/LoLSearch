@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val versionFlow = viewModel.versionFlow.collectAsStateWithLifecycle().value
             installSplashScreen().setKeepOnScreenCondition {
-                versionFlow == ApiResult.Loading
+                versionFlow != ApiResult.Loading
             }
 
             LoLSearchTheme {

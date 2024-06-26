@@ -2,6 +2,7 @@ package com.sb.park.data.repository
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +22,18 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
         it[VERSION] ?: "14.12.1"
     }
 
+    override suspend fun saveIsDarkTheme(isDarkTheme: Boolean) {
+        dataStore.edit {
+            it[IS_DARK_THEME] = isDarkTheme
+        }
+    }
+
+    override val getIsDarkTheme: Flow<Boolean> = dataStore.data.map {
+        it[IS_DARK_THEME] ?: false
+    }
+
     companion object {
         private val VERSION = stringPreferencesKey("LOL_VERSION")
+        private val IS_DARK_THEME = booleanPreferencesKey("IS_DARK_THEME")
     }
 }

@@ -14,4 +14,7 @@ interface ChampionDao {
 
     @Query("SELECT * FROM ChampionModel")
     suspend fun getChampionList(): List<ChampionModel>
+
+    @Query("DELETE FROM ChampionModel")
+    suspend fun deleteChampionList()
 }

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface VersionRepository {
 
-    fun setVersion(): Flow<ApiResult<Unit>>
+    fun fetchVersion(): Flow<ApiResult<Unit>>
 }

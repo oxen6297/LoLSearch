@@ -14,7 +14,7 @@ internal class VersionRepositoryImpl @Inject constructor(
     private val championDao: ChampionDao
 ) : VersionRepository {
 
-    override fun setVersion(): Flow<ApiResult<Unit>> = safeFlow {
+    override fun fetchVersion(): Flow<ApiResult<Unit>> = safeFlow {
         val serverVersion = dataDragonService.getVersion().first()
         val myVersion = dataStoreRepository.getVersion.first()
 

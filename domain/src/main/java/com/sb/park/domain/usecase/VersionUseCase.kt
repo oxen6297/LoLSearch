@@ -7,5 +7,5 @@ import javax.inject.Inject
 
 class VersionUseCase @Inject constructor(private val versionRepository: VersionRepository) {
 
-    operator fun invoke(): Flow<ApiResult<Unit>> = versionRepository.setVersion()
+    operator fun invoke(): Flow<ApiResult<Unit>> = versionRepository.fetchVersion()
 }

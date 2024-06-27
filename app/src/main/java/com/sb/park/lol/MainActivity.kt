@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.sb.park.designsystem.ApiResult
 import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
@@ -31,10 +31,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val isLoading = viewModel.isLoading.collectAsStateWithLifecycle().value
-            installSplashScreen().setKeepOnScreenCondition { isLoading }
-
             LoLSearchTheme {
+                installSplashScreen().setKeepOnScreenCondition {
+                    viewModel.isLoading.value != ApiResult.Loading
+                }
+
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = { BottomNavigation(navController = navController) }

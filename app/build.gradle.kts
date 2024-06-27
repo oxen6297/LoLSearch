@@ -71,14 +71,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.jake.timber)
 
+    implementation(libs.jake.timber)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.datastore)
-    implementation(libs.lottie)
-    implementation(libs.bumptech.glide)
+    implementation(libs.io.coil)
 
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.splash)
+    implementation(libs.hilt.navigation)
+    implementation(libs.compose.shimmer)
 }

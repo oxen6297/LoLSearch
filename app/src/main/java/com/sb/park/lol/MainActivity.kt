@@ -13,13 +13,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sb.park.designsystem.ApiResult
+import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
 import com.sb.park.lol.screen.DictionaryScreen
 import com.sb.park.lol.screen.SearchScreen
 import com.sb.park.lol.screen.SettingScreen
-import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.viewmodels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,10 +31,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val versionFlow = viewModel.versionFlow.collectAsStateWithLifecycle().value
-            installSplashScreen().setKeepOnScreenCondition {
-                versionFlow != ApiResult.Loading
-            }
+            val isLoading = viewModel.isLoading.collectAsStateWithLifecycle().value
+            installSplashScreen().setKeepOnScreenCondition { isLoading }
 
             LoLSearchTheme {
                 val navController = rememberNavController()

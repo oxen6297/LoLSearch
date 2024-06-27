@@ -33,7 +33,7 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
     }
 
     companion object {
-        private const val DEFAULT_VERSION = "14.13.1"
+        private const val DEFAULT_VERSION = "14.12.1"
         private val VERSION = stringPreferencesKey("LOL_VERSION")
         private val IS_DARK_THEME = booleanPreferencesKey("IS_DARK_THEME")
     }

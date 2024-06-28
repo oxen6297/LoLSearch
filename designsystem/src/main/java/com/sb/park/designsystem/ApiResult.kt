@@ -13,12 +13,25 @@ sealed class ApiResult<out T> {
     data class Error(val e: Throwable) : ApiResult<Nothing>()
 }
 
-inline fun <T> safeFlow(crossinline service: suspend () -> T): Flow<ApiResult<T>> =
-    flow<ApiResult<T>> {
-        emit(ApiResult.Success(service()))
-    }.onStart {
-        emit(ApiResult.Loading)
-    }.catch {
-        it.printStackTrace()
-        emit(ApiResult.Error(it))
-    }.flowOn(Dispatchers.IO)
+fun <T> ApiResult<T>.onSuccess(): T? = if (this is ApiResult.Success<T>) {
+    data
+} else {
+    null
+}
+
+fun <T> ApiResult<T>.onError(): Throwable? = if (this is ApiResult.Error) {
+    e
+} else {
+    null
+}
+
+inline fun <T> safeFlow(
+    crossinline service: suspend () -> T
+): Flow<ApiResult<T>> = flow<ApiResult<T>> {
+    emit(ApiResult.Success(service()))
+}.onStart {
+    emit(ApiResult.Loading)
+}.catch {
+    it.printStackTrace()
+    emit(ApiResult.Error(it))
+}.flowOn(Dispatchers.IO)

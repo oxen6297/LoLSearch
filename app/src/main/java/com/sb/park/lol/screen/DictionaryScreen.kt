@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,9 +65,10 @@ fun ChampionList(
         columns = GridCells.Fixed(3),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(championList.size) { position ->
+        items(championList) { item ->
             ChampionItem(
-                name = championList[position].name,
+                name = item.name,
+                id = item.id,
                 navController = navController,
             )
         }
@@ -75,12 +77,13 @@ fun ChampionList(
 
 @Composable
 fun ChampionItem(
+    id: String,
     name: String,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigate("detail/$name") },
+        modifier = modifier.clickable { navController.navigate("detail/$id") },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

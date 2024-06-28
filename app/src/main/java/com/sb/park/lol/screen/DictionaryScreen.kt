@@ -1,6 +1,7 @@
 package com.sb.park.lol.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,18 +10,88 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import com.sb.park.designsystem.ApiResult
+import com.sb.park.designsystem.onError
+import com.sb.park.designsystem.onSuccess
+import com.sb.park.lol.R
+import com.sb.park.lol.viewmodels.DictionaryViewModel
+import com.sb.park.model.ChampionModel
 import com.valentinilk.shimmer.shimmer
 
 @Composable
-fun DictionaryScreen() {
-    ChampionShimmer()
+fun DictionaryScreen(
+    showSnackBar: (Throwable?) -> Unit,
+    navController: NavController,
+    viewModel: DictionaryViewModel = hiltViewModel()
+) {
+    val championUiState by viewModel.championFlow.collectAsStateWithLifecycle()
+
+    when (championUiState) {
+        is ApiResult.Loading -> ChampionShimmer()
+        is ApiResult.Success -> ChampionList(
+            championList = championUiState.onSuccess() ?: emptyList(),
+            navController = navController
+        )
+
+        is ApiResult.Error -> showSnackBar(championUiState.onError())
+    }
+}
+
+@Composable
+fun ChampionList(
+    championList: List<ChampionModel>,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        modifier = modifier.padding(20.dp),
+        columns = GridCells.Fixed(3),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        items(championList.size) { position ->
+            ChampionItem(
+                name = championList[position].name,
+                navController = navController,
+            )
+        }
+    }
+}
+
+@Composable
+fun ChampionItem(
+    name: String,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.clickable { navController.navigate("detail/$name") },
+        verticalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AsyncImage(
+            model = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg",
+            contentDescription = name,
+            placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+            error = painterResource(id = R.drawable.ic_launcher_foreground)
+        )
+        Text(text = name)
+    }
 }
 
 @Composable

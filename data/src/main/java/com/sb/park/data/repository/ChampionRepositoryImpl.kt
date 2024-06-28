@@ -1,7 +1,6 @@
 package com.sb.park.data.repository
 
 import com.sb.park.data.mapper.toData
-import com.sb.park.data.model.datadragon.ChampionResponse
 import com.sb.park.data.room.ChampionDao
 import com.sb.park.data.service.DataDragonService
 import com.sb.park.designsystem.ApiResult
@@ -26,9 +25,9 @@ internal class ChampionRepositoryImpl @Inject constructor(
         }
 
         val version = dataStoreRepository.getVersion.first()
-        dataDragonService.getChampion<ChampionResponse>(version).data.values.map {
+        dataDragonService.getChampion(version).data.values.toList().map {
             it.toData()
-        }.toList().also {
+        }.also {
             championDao.insertChampion(it)
         }
     }

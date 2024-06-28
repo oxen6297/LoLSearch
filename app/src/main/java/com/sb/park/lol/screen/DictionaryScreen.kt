@@ -31,6 +31,7 @@ import com.sb.park.designsystem.ApiResult
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.lol.R
+import com.sb.park.lol.utils.mainImage
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ChampionModel
 import com.valentinilk.shimmer.shimmer
@@ -65,10 +66,9 @@ fun ChampionList(
         columns = GridCells.Fixed(3),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(championList) { item ->
+        items(championList) { championModel ->
             ChampionItem(
-                name = item.name,
-                id = item.id,
+                championModel = championModel,
                 navController = navController,
             )
         }
@@ -77,23 +77,22 @@ fun ChampionList(
 
 @Composable
 fun ChampionItem(
-    id: String,
-    name: String,
+    championModel: ChampionModel,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigate("detail/$id") },
+        modifier = modifier.clickable { navController.navigate("detail/${championModel.id}") },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            model = "http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${name}_0.jpg",
-            contentDescription = name,
+            model = mainImage(championModel.id),
+            contentDescription = championModel.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)
         )
-        Text(text = name)
+        Text(text = championModel.name)
     }
 }
 

@@ -1,5 +1,6 @@
 package com.sb.park.data.service
 
+import com.sb.park.data.model.datadragon.ChampionResponse
 import com.sb.park.data.model.datadragon.DataDragonResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -10,5 +11,5 @@ interface DataDragonService {
     suspend fun getVersion(): List<String>
 
     @GET("cdn/{lol_version}/data/ko_KR/champion.json")
-    suspend fun <T> getChampion(@Path("lol_version") version: String): DataDragonResponse<T>
+    suspend fun getChampion(@Path("lol_version") version: String): DataDragonResponse<ChampionResponse>
 }

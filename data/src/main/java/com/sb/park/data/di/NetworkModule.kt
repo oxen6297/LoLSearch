@@ -1,7 +1,10 @@
 package com.sb.park.data.di
 
 import com.sb.park.data.DataDragon
+import com.sb.park.data.adapter.DataDragonResponseAdapterFactory
 import com.sb.park.data.service.DataDragonService
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,6 +38,20 @@ object NetworkModule {
         .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
         .build()
 
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(DataDragonResponseAdapterFactory())
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
+
+    @Provides
+    @Singleton
+    fun provideMoshiConverterFactory(moshi: Moshi): MoshiConverterFactory =
+        MoshiConverterFactory.create(moshi)
+
+
     /**
      * DataDragon API
      */
@@ -42,11 +59,15 @@ object NetworkModule {
     @Provides
     @Singleton
     @DataDragonRetrofit
-    fun provideDataDragonRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    fun provideDataDragonRetrofit(
+        okHttpClient: OkHttpClient,
+        moshiConverterFactory: MoshiConverterFactory
+    ): Retrofit = Retrofit.Builder()
         .baseUrl(DataDragon.CHAMPION_BASE_URL)
         .client(okHttpClient)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(moshiConverterFactory)
         .build()
+
 
     @Provides
     @Singleton

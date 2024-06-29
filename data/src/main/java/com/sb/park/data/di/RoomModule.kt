@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.sb.park.data.room.ChampionDao
 import com.sb.park.data.room.LOLDataBase
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,12 +14,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RoomModule {
-
-    @Provides
-    @Singleton
-    fun provideMoshi(): Moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
 
     @Provides
     @Singleton

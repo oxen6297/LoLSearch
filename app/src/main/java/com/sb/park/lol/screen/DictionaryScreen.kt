@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,11 +31,14 @@ import coil.compose.AsyncImage
 import com.sb.park.designsystem.ApiResult
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
+import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
 import com.sb.park.lol.utils.mainImage
+import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ChampionModel
 import com.valentinilk.shimmer.shimmer
+import kotlinx.collections.immutable.ImmutableList
 
 @Composable
 fun DictionaryScreen(
@@ -46,10 +50,12 @@ fun DictionaryScreen(
 
     when (championUiState) {
         is ApiResult.Loading -> ChampionShimmer()
-        is ApiResult.Success -> ChampionList(
-            championList = championUiState.onSuccess() ?: emptyList(),
-            navController = navController
-        )
+        is ApiResult.Success -> {
+            ChampionList(
+                championList = championUiState.onSuccess().toImmutableList(),
+                navController = navController
+            )
+        }
 
         is ApiResult.Error -> showSnackBar(championUiState.onError())
     }
@@ -57,21 +63,26 @@ fun DictionaryScreen(
 
 @Composable
 fun ChampionList(
-    championList: List<ChampionModel>,
+    championList: ImmutableList<ChampionModel>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    LazyVerticalGrid(
-        modifier = modifier.padding(20.dp),
-        columns = GridCells.Fixed(3),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalArrangement = Arrangement.spacedBy(30.dp)
-    ) {
-        items(championList) { championModel ->
-            ChampionItem(
-                championModel = championModel,
-                navController = navController,
-            )
+    Column(modifier = modifier.padding(20.dp)) {
+        TopBar(title = stringResource(id = R.string.champion_list))
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalArrangement = Arrangement.spacedBy(30.dp)
+        ) {
+            items(
+                items = championList,
+                key = { championModel -> championModel.id }
+            ) { championModel ->
+                ChampionItem(
+                    championModel = championModel,
+                    navController = navController,
+                )
+            }
         }
     }
 }

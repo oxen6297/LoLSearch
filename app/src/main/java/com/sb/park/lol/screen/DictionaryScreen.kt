@@ -31,6 +31,7 @@ import coil.compose.AsyncImage
 import com.sb.park.designsystem.ApiResult
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
+import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
 import com.sb.park.lol.utils.mainImage
@@ -68,7 +69,10 @@ fun ChampionList(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.padding(20.dp)) {
-        TopBar(title = stringResource(id = R.string.champion_list))
+        TopBar(
+            title = stringResource(id = R.string.champion_list),
+            style = LoLTheme.typography.titleLargeSB
+        )
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
@@ -104,7 +108,10 @@ fun ChampionItem(
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)
         )
-        Text(text = championModel.name)
+        Text(
+            text = championModel.name,
+            style = LoLTheme.typography.contentMedium
+        )
     }
 }
 

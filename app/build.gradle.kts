@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -40,9 +41,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -82,4 +80,5 @@ dependencies {
     implementation(libs.androidx.splash)
     implementation(libs.hilt.navigation)
     implementation(libs.compose.shimmer)
+    implementation(libs.jetbrains.collections)
 }

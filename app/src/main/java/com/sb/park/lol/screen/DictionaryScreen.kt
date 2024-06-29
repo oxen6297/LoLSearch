@@ -64,7 +64,8 @@ fun ChampionList(
     LazyVerticalGrid(
         modifier = modifier.padding(20.dp),
         columns = GridCells.Fixed(3),
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(30.dp)
     ) {
         items(championList) { championModel ->
             ChampionItem(

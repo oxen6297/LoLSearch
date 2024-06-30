@@ -13,15 +13,29 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+    primary = NAVY10,
+    onPrimary = WHITE,
+    primaryContainer = WHITE,
+    onPrimaryContainer = NAVY10,
+    inversePrimary = WHITE,
+    secondary = BLUE,
+    onSecondary = WHITE,
+    surface = NAVY10,
+    onSurface = WHITE,
+    onSurfaceVariant = WHITE
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+    primary = NAVY10,
+    onPrimary = WHITE,
+    primaryContainer = WHITE,
+    onPrimaryContainer = NAVY10,
+    inversePrimary = WHITE,
+    secondary = BLUE,
+    onSecondary = WHITE,
+    surface = NAVY10,
+    onSurface = WHITE,
+    onSurfaceVariant = WHITE
 )
 
 val LocalDarkTheme = compositionLocalOf { true }

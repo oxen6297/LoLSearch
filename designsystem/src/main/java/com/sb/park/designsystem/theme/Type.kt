@@ -71,6 +71,19 @@ val Typography = LoLTypography(
         fontSize = 14.sp,
         fontWeight = FontWeight.Bold
     ),
+
+    contentLargeSB = SansSerifStyle.copy(
+        fontSize = 20.sp,
+        fontWeight = FontWeight.SemiBold
+    ),
+    contentMediumSB = SansSerifStyle.copy(
+        fontSize = 17.sp,
+        fontWeight = FontWeight.SemiBold
+    ),
+    contentSmallSB = SansSerifStyle.copy(
+        fontSize = 14.sp,
+        fontWeight = FontWeight.SemiBold
+    )
 )
 
 @Immutable
@@ -94,6 +107,10 @@ data class LoLTypography(
     val contentLargeB: TextStyle,
     val contentMediumB: TextStyle,
     val contentSmallB: TextStyle,
+
+    val contentLargeSB: TextStyle,
+    val contentMediumSB: TextStyle,
+    val contentSmallSB: TextStyle,
 )
 
 val LocalTypography = staticCompositionLocalOf {
@@ -116,7 +133,11 @@ val LocalTypography = staticCompositionLocalOf {
 
         contentLargeB = SansSerifStyle,
         contentMediumB = SansSerifStyle,
-        contentSmallB = SansSerifStyle
+        contentSmallB = SansSerifStyle,
+
+        contentLargeSB = SansSerifStyle,
+        contentMediumSB = SansSerifStyle,
+        contentSmallSB = SansSerifStyle
     )
 }
 

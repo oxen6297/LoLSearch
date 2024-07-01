@@ -8,7 +8,8 @@ val WHITE = Color(0xFFFFFFFF)
 /**
  * Riot Color
  */
-val NAVY10 = Color(0xFF0A1428)
+val NAVY10 = Color(0xFF000217)
+val NAVY = Color(0xFF0E1124)
 val BLUE = Color(0xFF005A82)
 val SKY_BLUE = Color(0xFF0397AB)
 val MINT = Color(0xFF0AC8B9)

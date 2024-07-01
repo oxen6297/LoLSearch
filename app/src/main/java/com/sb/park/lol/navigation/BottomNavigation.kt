@@ -1,6 +1,7 @@
 package com.sb.park.lol.navigation
 
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -8,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 
@@ -21,7 +23,7 @@ fun BottomNavigation(navController: NavHostController) {
         BottomNavItem.Setting,
     )
 
-    NavigationBar {
+    NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
         items.forEach { item ->
             NavigationBarItem(
                 selected = currentRoute == item.route,
@@ -42,13 +44,11 @@ fun BottomNavigation(navController: NavHostController) {
                 },
                 onClick = {
                     navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { route ->
-                            popUpTo(route) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
                         }
+                        launchSingleTop = true
+                        restoreState = true
                     }
                 }
             )

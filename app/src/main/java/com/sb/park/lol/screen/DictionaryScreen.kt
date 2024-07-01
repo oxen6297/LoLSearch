@@ -68,12 +68,13 @@ fun ChampionList(
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.padding(20.dp)) {
+    Column {
         TopBar(
             title = stringResource(id = R.string.champion_list),
             style = LoLTheme.typography.titleLargeSB
         )
         LazyVerticalGrid(
+            modifier = modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
             columns = GridCells.Fixed(3),
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalArrangement = Arrangement.spacedBy(30.dp)
@@ -110,7 +111,7 @@ fun ChampionItem(
         )
         Text(
             text = championModel.name,
-            style = LoLTheme.typography.contentMedium
+            style = LoLTheme.typography.contentMediumSB
         )
     }
 }

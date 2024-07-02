@@ -28,7 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.sb.park.designsystem.ApiResult
+import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
@@ -47,18 +47,18 @@ fun DictionaryScreen(
     navController: NavController,
     viewModel: DictionaryViewModel = hiltViewModel()
 ) {
-    val championUiState by viewModel.championFlow.collectAsStateWithLifecycle()
+    val championUiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
     when (championUiState) {
-        is ApiResult.Loading -> ChampionShimmer()
-        is ApiResult.Success -> {
+        is UiState.Loading -> ChampionShimmer()
+        is UiState.Success -> {
             ChampionList(
                 championList = championUiState.onSuccess().toImmutableList(),
                 navController = navController
             )
         }
 
-        is ApiResult.Error -> showSnackBar(championUiState.onError())
+        is UiState.Error -> showSnackBar(championUiState.onError())
     }
 }
 

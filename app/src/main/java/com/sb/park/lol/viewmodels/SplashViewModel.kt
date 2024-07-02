@@ -2,7 +2,7 @@ package com.sb.park.lol.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sb.park.designsystem.ApiResult
+import com.sb.park.designsystem.UiState
 import com.sb.park.domain.usecase.VersionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -15,6 +15,6 @@ class SplashViewModel @Inject constructor(versionUseCase: VersionUseCase) : View
     val isLoading = versionUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
-        initialValue = ApiResult.Loading
+        initialValue = UiState.Loading
     )
 }

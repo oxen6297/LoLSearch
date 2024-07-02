@@ -15,7 +15,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sb.park.designsystem.ApiResult
+import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             LoLSearchTheme {
                 installSplashScreen().setKeepOnScreenCondition {
-                    viewModel.isLoading.value != ApiResult.Loading
+                    viewModel.isLoading.value != UiState.Loading
                 }
 
                 val navController = rememberNavController()

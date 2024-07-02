@@ -3,40 +3,48 @@ package com.sb.park.data.mapper
 import com.sb.park.data.model.datadragon.ChampionInfoResponse
 import com.sb.park.model.ChampionInfoModel
 
-fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoModel(
-    id = this.id,
-    name = this.name,
-    title = this.title,
-    lore = this.lore,
-    image = this.image.toModel(),
-    tags = this.tags,
-    skins = this.skins.map { it.toModel() },
-    spells = this.spells.map { it.toModel() },
-    passive = this.passive.toModel()
-)
-
-fun ChampionInfoResponse.ImageResponse.toModel(): ChampionInfoModel.ImageModel =
-    ChampionInfoModel.ImageModel(
-        fileName = this.fileName
+object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel> {
+    override fun asModel(response: ChampionInfoResponse): ChampionInfoModel = ChampionInfoModel(
+        id = response.id,
+        name = response.name,
+        title = response.title,
+        lore = response.lore,
+        image = response.image.toModel(),
+        tags = response.tags,
+        skins = response.skins.toModel(),
+        spells = response.spells.toModel(),
+        passive = response.passive.toModel()
     )
 
-fun ChampionInfoResponse.SkinResponse.toModel(): ChampionInfoModel.SkinModel =
-    ChampionInfoModel.SkinModel(
-        num = this.num,
-        name = this.name
-    )
+    private fun ChampionInfoResponse.ImageResponse.toModel(): ChampionInfoModel.ImageModel =
+        ChampionInfoModel.ImageModel(
+            fileName = this.fileName
+        )
 
-fun ChampionInfoResponse.SpellResponse.toModel(): ChampionInfoModel.SpellModel =
-    ChampionInfoModel.SpellModel(
-        id = this.id,
-        name = this.name,
-        description = this.description,
-        image = this.image.toModel()
-    )
+    private fun List<ChampionInfoResponse.SkinResponse>.toModel(): List<ChampionInfoModel.SkinModel> =
+        map { response ->
+            ChampionInfoModel.SkinModel(
+                num = response.num,
+                name = response.name
+            )
+        }
 
-fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
-    ChampionInfoModel.PassiveModel(
-        name = this.name,
-        description = this.description,
-        image = this.image.toModel()
-    )
+    private fun List<ChampionInfoResponse.SpellResponse>.toModel(): List<ChampionInfoModel.SpellModel> =
+        map { response ->
+            ChampionInfoModel.SpellModel(
+                id = response.id,
+                name = response.name,
+                description = response.description,
+                image = response.image.toModel()
+            )
+        }
+
+    private fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
+        ChampionInfoModel.PassiveModel(
+            name = this.name,
+            description = this.description,
+            image = this.image.toModel()
+        )
+}
+
+fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoMapper.asModel(this)

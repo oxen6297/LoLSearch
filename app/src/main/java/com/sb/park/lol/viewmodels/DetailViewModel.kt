@@ -19,8 +19,7 @@ class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val name = savedStateHandle.get<String>(KeyFile.CHAMPION_NAME)
-        ?: throw NullPointerException("unKnown champion name")
+    private val name: String = checkNotNull(savedStateHandle[KeyFile.CHAMPION_NAME])
 
     val uiStateFlow: StateFlow<UiState<ChampionInfoModel>> = championInfoUseCase(name).stateIn(
         scope = viewModelScope,

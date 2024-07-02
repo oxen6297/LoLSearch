@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -134,7 +135,7 @@ fun ChampionShimmer(modifier: Modifier = Modifier) {
 @Composable
 fun ItemShimmer(modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier,
+        modifier = modifier.background(color = MaterialTheme.colorScheme.surface),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

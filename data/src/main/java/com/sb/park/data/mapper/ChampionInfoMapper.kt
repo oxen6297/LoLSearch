@@ -3,7 +3,8 @@ package com.sb.park.data.mapper
 import com.sb.park.data.model.datadragon.ChampionInfoResponse
 import com.sb.park.model.ChampionInfoModel
 
-object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel> {
+private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel> {
+    
     override fun asModel(response: ChampionInfoResponse): ChampionInfoModel = ChampionInfoModel(
         id = response.id,
         name = response.name,
@@ -27,7 +28,6 @@ object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel>
             name = this.name
         )
 
-
     private fun ChampionInfoResponse.SpellResponse.toModel(): ChampionInfoModel.SpellModel =
         ChampionInfoModel.SpellModel(
             id = this.id,
@@ -35,7 +35,6 @@ object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel>
             description = this.description,
             image = this.image.toModel()
         )
-
 
     private fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
         ChampionInfoModel.PassiveModel(
@@ -45,4 +44,4 @@ object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel>
         )
 }
 
-fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoMapper.asModel(this)
+internal fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoMapper.asModel(this)

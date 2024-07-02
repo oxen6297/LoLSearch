@@ -4,7 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.sb.park.data.room.ChampionDao
 import com.sb.park.data.room.ChampionInfoDao
+import com.sb.park.data.room.ImageTypeConverter
 import com.sb.park.data.room.LOLDataBase
+import com.sb.park.data.room.PassiveTypeConverter
+import com.sb.park.data.room.SkinTypeConverter
+import com.sb.park.data.room.SpellTypeConverter
+import com.sb.park.data.room.StringListTypeConverter
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +25,18 @@ object RoomModule {
     @Singleton
     fun provideLoLDatabase(
         @ApplicationContext context: Context,
+        imageTypeConverter: ImageTypeConverter,
+        stringListTypeConverter: StringListTypeConverter,
+        skinTypeConverter: SkinTypeConverter,
+        spellTypeConverter: SpellTypeConverter,
+        passiveTypeConverter: PassiveTypeConverter
     ): LOLDataBase = Room
         .databaseBuilder(context, LOLDataBase::class.java, "LOL.db")
+        .addTypeConverter(imageTypeConverter)
+        .addTypeConverter(stringListTypeConverter)
+        .addTypeConverter(skinTypeConverter)
+        .addTypeConverter(spellTypeConverter)
+        .addTypeConverter(passiveTypeConverter)
         .fallbackToDestructiveMigration()
         .build()
 

@@ -1,6 +1,6 @@
 package com.sb.park.data.di
 
-import com.sb.park.data.DataDragon
+import com.sb.park.data.BuildConfig
 import com.sb.park.data.adapter.DataDragonResponseAdapterFactory
 import com.sb.park.data.service.DataDragonService
 import com.squareup.moshi.Moshi
@@ -63,7 +63,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient,
         moshiConverterFactory: MoshiConverterFactory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl(DataDragon.CHAMPION_BASE_URL)
+        .baseUrl(BuildConfig.DATA_DRAGON_BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(moshiConverterFactory)
         .build()

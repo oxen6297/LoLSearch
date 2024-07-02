@@ -1,8 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+}
+
+val properties = Properties().apply {
+    load(FileInputStream(rootProject.file("local.properties")))
 }
 
 android {
@@ -14,6 +21,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "DATA_DRAGON_BASE_URL", properties.getProperty("dataDragonBaseUrl"))
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {

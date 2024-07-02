@@ -11,8 +11,8 @@ object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel>
         lore = response.lore,
         image = response.image.toModel(),
         tags = response.tags,
-        skins = response.skins.toModel(),
-        spells = response.spells.toModel(),
+        skins = response.skins.map { it.toModel() },
+        spells = response.spells.map { it.toModel() },
         passive = response.passive.toModel()
     )
 
@@ -21,23 +21,21 @@ object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel>
             fileName = this.fileName
         )
 
-    private fun List<ChampionInfoResponse.SkinResponse>.toModel(): List<ChampionInfoModel.SkinModel> =
-        map { response ->
-            ChampionInfoModel.SkinModel(
-                num = response.num,
-                name = response.name
-            )
-        }
+    private fun ChampionInfoResponse.SkinResponse.toModel(): ChampionInfoModel.SkinModel =
+        ChampionInfoModel.SkinModel(
+            num = this.num,
+            name = this.name
+        )
 
-    private fun List<ChampionInfoResponse.SpellResponse>.toModel(): List<ChampionInfoModel.SpellModel> =
-        map { response ->
-            ChampionInfoModel.SpellModel(
-                id = response.id,
-                name = response.name,
-                description = response.description,
-                image = response.image.toModel()
-            )
-        }
+
+    private fun ChampionInfoResponse.SpellResponse.toModel(): ChampionInfoModel.SpellModel =
+        ChampionInfoModel.SpellModel(
+            id = this.id,
+            name = this.name,
+            description = this.description,
+            image = this.image.toModel()
+        )
+
 
     private fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
         ChampionInfoModel.PassiveModel(

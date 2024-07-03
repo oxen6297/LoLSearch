@@ -12,16 +12,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
+import com.sb.park.lol.navigation.ScreenNav
+import com.sb.park.lol.screen.DetailScreen
 import com.sb.park.lol.screen.DictionaryScreen
 import com.sb.park.lol.screen.SearchScreen
 import com.sb.park.lol.screen.SettingScreen
+import com.sb.park.lol.utils.KeyFile
 import com.sb.park.lol.viewmodels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -41,8 +46,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 val navController = rememberNavController()
-                val snackBarHostState = remember { SnackbarHostState() }
                 val coroutineScope = rememberCoroutineScope()
+                val snackBarHostState = remember { SnackbarHostState() }
                 val onShowSnackBar: (throwable: Throwable?) -> Unit = { throwable ->
                     coroutineScope.launch {
                         snackBarHostState.showSnackbar(
@@ -57,20 +62,30 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     containerColor = MaterialTheme.colorScheme.surface,
                     bottomBar = { BottomNavigation(navController = navController) }
-                ) {
+                ) { innerPadding ->
                     NavHost(
                         navController = navController,
                         startDestination = BottomNavItem.Dictionary.route,
-                        modifier = Modifier.padding(it)
+                        modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(BottomNavItem.Dictionary.route) {
+                        composable(route = BottomNavItem.Dictionary.route) {
                             DictionaryScreen(onShowSnackBar, navController)
                         }
-                        composable(BottomNavItem.Search.route) {
+                        composable(route = BottomNavItem.Search.route) {
                             SearchScreen()
                         }
-                        composable(BottomNavItem.Setting.route) {
+                        composable(route = BottomNavItem.Setting.route) {
                             SettingScreen()
+                        }
+                        composable(
+                            route = "${ScreenNav.DETAIL.route}/${KeyFile.CHAMPION_NAME}",
+                            arguments = listOf(
+                                navArgument(KeyFile.CHAMPION_NAME) {
+                                    type = NavType.StringType
+                                }
+                            )
+                        ) {
+                            DetailScreen(onShowSnackBar, navController)
                         }
                     }
                 }

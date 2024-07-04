@@ -37,7 +37,7 @@ class StringListTypeConverter @Inject constructor(private val moshi: Moshi) {
     }
 
     @TypeConverter
-    fun fromImage(type: List<String>): String {
+    fun fromList(type: List<String>): String {
         val listType = Types.newParameterizedType(List::class.java, String::class.java)
         val adapter: JsonAdapter<List<String>> = moshi.adapter(listType)
         return adapter.toJson(type)
@@ -56,7 +56,7 @@ class SkinTypeConverter @Inject constructor(private val moshi: Moshi) {
     }
 
     @TypeConverter
-    fun fromImage(type: List<ChampionInfoModel.SkinModel>): String {
+    fun fromSkin(type: List<ChampionInfoModel.SkinModel>): String {
         val listType =
             Types.newParameterizedType(List::class.java, ChampionInfoModel.SkinModel::class.java)
         val adapter: JsonAdapter<List<ChampionInfoModel.SkinModel>> = moshi.adapter(listType)
@@ -76,7 +76,7 @@ class SpellTypeConverter @Inject constructor(private val moshi: Moshi) {
     }
 
     @TypeConverter
-    fun fromImage(type: List<ChampionInfoModel.SpellModel>): String {
+    fun fromSpell(type: List<ChampionInfoModel.SpellModel>): String {
         val listType =
             Types.newParameterizedType(List::class.java, ChampionInfoModel.SpellModel::class.java)
         val adapter: JsonAdapter<List<ChampionInfoModel.SpellModel>> = moshi.adapter(listType)
@@ -95,7 +95,7 @@ class PassiveTypeConverter @Inject constructor(private val moshi: Moshi) {
     }
 
     @TypeConverter
-    fun fromImage(type: ChampionInfoModel.PassiveModel): String {
+    fun fromPassive(type: ChampionInfoModel.PassiveModel): String {
         val adapter: JsonAdapter<ChampionInfoModel.PassiveModel> =
             moshi.adapter(ChampionInfoModel.PassiveModel::class.java)
         return adapter.toJson(type)

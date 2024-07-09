@@ -79,6 +79,5 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.splash)
     implementation(libs.hilt.navigation)
-    implementation(libs.compose.shimmer)
     implementation(libs.jetbrains.collections)
 }

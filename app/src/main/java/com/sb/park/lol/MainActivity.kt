@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            DetailScreen(onShowSnackBar, navController)
+                            DetailScreen(onShowSnackBar)
                         }
                     }
                 }

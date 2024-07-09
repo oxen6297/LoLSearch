@@ -7,21 +7,14 @@ import kotlinx.coroutines.flow.onStart
 
 sealed interface UiState<out T> {
     data object Loading : UiState<Nothing>
-    data class Success<out T>(val data: T?) : UiState<T>
+    data class Success<out T>(val data: T) : UiState<T>
     data class Error(val e: Throwable) : UiState<Nothing>
 }
 
-fun <T> UiState<T>.onSuccess(): T? = if (this is UiState.Success<T>) {
-    data
-} else {
-    null
-}
+fun <T> UiState<T>.onSuccess(): T = (this as UiState.Success).data
 
-fun <T> UiState<T>.onError(): Throwable? = if (this is UiState.Error) {
-    e
-} else {
-    null
-}
+fun <T> UiState<T>.onError(): Throwable  = (this as UiState.Error).e
+
 
 inline fun <T> safeFlow(
     crossinline service: suspend () -> T

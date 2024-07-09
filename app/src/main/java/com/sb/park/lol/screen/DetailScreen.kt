@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -79,9 +80,12 @@ fun DetailShimmer(modifier: Modifier = Modifier) {
 
 @Composable
 fun ImageShimmer() {
-    ShimmerSpacer(modifier = Modifier
-        .fillMaxWidth()
-        .aspectRatio(1.6f))
+    ShimmerSpacer(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1.6f),
+        shape = RectangleShape
+    )
 }
 
 @Composable
@@ -93,15 +97,21 @@ fun TitleShimmer(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ShimmerSpacer(modifier = Modifier
-            .width(80.dp)
-            .height(30.dp))
-        ShimmerSpacer(modifier = Modifier
-            .width(70.dp)
-            .height(25.dp))
-        ShimmerSpacer(modifier = Modifier
-            .width(70.dp)
-            .height(25.dp))
+        ShimmerSpacer(
+            modifier = Modifier
+                .width(80.dp)
+                .height(30.dp)
+        )
+        ShimmerSpacer(
+            modifier = Modifier
+                .width(70.dp)
+                .height(25.dp)
+        )
+        ShimmerSpacer(
+            modifier = Modifier
+                .width(70.dp)
+                .height(25.dp)
+        )
     }
 }
 
@@ -114,13 +124,17 @@ fun DescriptionShimmer(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        ShimmerSpacer(modifier = Modifier
-            .width(180.dp)
-            .height(30.dp))
+        ShimmerSpacer(
+            modifier = Modifier
+                .width(180.dp)
+                .height(30.dp)
+        )
         repeat(3) {
-            ShimmerSpacer(modifier = Modifier
-                .fillMaxWidth()
-                .height(20.dp))
+            ShimmerSpacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(20.dp)
+            )
         }
     }
 }

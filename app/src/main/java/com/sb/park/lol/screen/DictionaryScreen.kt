@@ -34,6 +34,7 @@ import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
 import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
+import com.sb.park.lol.navigation.ScreenNav
 import com.sb.park.lol.utils.mainImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
@@ -98,7 +99,7 @@ fun ChampionItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigate("detail/${championModel.id}") },
+        modifier = modifier.clickable { navController.navigate("${ScreenNav.DETAIL.route}/${championModel.id}") },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -138,12 +139,16 @@ fun ItemShimmer(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         repeat(3) {
-            ShimmerSpacer(modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(0.7f))
-            ShimmerSpacer(modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp))
+            ShimmerSpacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(0.7f)
+            )
+            ShimmerSpacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(30.dp)
+            )
             ShimmerSpacer(modifier = Modifier.height(20.dp))
         }
     }

@@ -26,7 +26,7 @@ import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToDetailScreen
-import com.sb.park.lol.utils.splashImage
+import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ChampionModel
@@ -95,7 +95,7 @@ fun ChampionItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            model = splashImage(championModel.id),
+            model = skinImage(championModel.id, 0),
             contentDescription = championModel.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)

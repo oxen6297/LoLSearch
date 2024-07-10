@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,7 +24,7 @@ fun ChampionShimmer(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .padding(20.dp)
-            .fillMaxWidth(),
+            .fillMaxSize(),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -41,16 +43,20 @@ fun ItemShimmer(modifier: Modifier = Modifier) {
     ) {
         repeat(3) {
             ShimmerSpacer(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(0.7f)
             )
             ShimmerSpacer(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .height(30.dp)
             )
-            ShimmerSpacer(modifier = modifier.height(20.dp))
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(20.dp)
+            )
         }
     }
 }

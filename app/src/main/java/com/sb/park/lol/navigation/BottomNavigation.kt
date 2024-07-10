@@ -28,18 +28,12 @@ fun BottomNavigation(navController: NavHostController) {
             NavigationBarItem(
                 selected = currentRoute == item.route,
                 label = {
-                    Text(
-                        text = stringResource(
-                            id = item.title
-                        )
-                    )
+                    Text(text = stringResource(id = item.title))
                 },
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),
-                        contentDescription = stringResource(
-                            id = item.title
-                        )
+                        contentDescription = stringResource(id = item.title)
                     )
                 },
                 onClick = {

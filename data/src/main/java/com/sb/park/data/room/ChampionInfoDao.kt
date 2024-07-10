@@ -12,8 +12,8 @@ interface ChampionInfoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertChampion(champion: ChampionInfoModel)
 
-    @Query("SELECT * FROM ChampionInfoModel")
-    suspend fun getChampion(): ChampionInfoModel?
+    @Query("SELECT * FROM ChampionInfoModel WHERE id = :id")
+    suspend fun getChampion(id: String): ChampionInfoModel?
 
     @Query("DELETE FROM ChampionInfoModel")
     suspend fun deleteChampion()

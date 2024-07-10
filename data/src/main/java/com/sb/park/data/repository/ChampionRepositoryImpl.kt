@@ -42,7 +42,7 @@ internal class ChampionRepositoryImpl @Inject constructor(
 
     override fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>> = safeFlow {
 
-        val dbChampionInfo = championInfoDao.getChampion()
+        val dbChampionInfo = championInfoDao.getChampion(championId)
 
         if (dbChampionInfo != null) {
             return@safeFlow dbChampionInfo

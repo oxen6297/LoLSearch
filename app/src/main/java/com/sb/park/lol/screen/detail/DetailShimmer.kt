@@ -1,6 +1,7 @@
-package com.sb.park.lol.screen
+package com.sb.park.lol.screen.detail
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -9,61 +10,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil.compose.AsyncImage
-import com.sb.park.designsystem.UiState
-import com.sb.park.designsystem.onError
-import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
-import com.sb.park.lol.R
-import com.sb.park.lol.utils.mainImage
-import com.sb.park.lol.viewmodels.DetailViewModel
-import com.sb.park.model.ChampionInfoModel
-
-@Composable
-fun DetailScreen(
-    showSnackBar: (Throwable?) -> Unit,
-    viewModel: DetailViewModel = hiltViewModel()
-) {
-    val championUiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
-
-    when (championUiState) {
-        is UiState.Loading -> DetailShimmer()
-        is UiState.Success -> ChampionInfo(championInfoModel = championUiState.onSuccess())
-        is UiState.Error -> showSnackBar(championUiState.onError())
-    }
-}
-
-@Composable
-fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
-    Column(
-        verticalArrangement = Arrangement.spacedBy(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.fillMaxSize()
-    ) {
-        AsyncImage(
-            model = mainImage(championInfoModel.id),
-            contentDescription = championInfoModel.name,
-            placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
-            error = painterResource(id = R.drawable.ic_launcher_foreground)
-        )
-        Text(text = championInfoModel.name)
-
-        //TODO detail component
-    }
-}
 
 @Composable
 fun DetailShimmer(modifier: Modifier = Modifier) {
@@ -75,6 +31,7 @@ fun DetailShimmer(modifier: Modifier = Modifier) {
         ImageShimmer()
         TitleShimmer()
         DescriptionShimmer()
+        SkillShimmer()
     }
 }
 
@@ -119,7 +76,8 @@ fun TitleShimmer(modifier: Modifier = Modifier) {
 fun DescriptionShimmer(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .wrapContentHeight()
             .padding(start = 20.dp, end = 20.dp),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -139,9 +97,22 @@ fun DescriptionShimmer(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun SkillShimmer(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier.padding(20.dp),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        ShimmerSpacer(
+            modifier = modifier.fillMaxSize(),
+            shape = RectangleShape
+        )
+    }
+}
+
 @Preview
 @Composable
-fun DetailShimmerPreview() {
+fun DetailShimmerPreview(showSystemUi: Boolean = true) {
     LoLSearchTheme {
         DetailShimmer()
     }

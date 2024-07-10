@@ -22,10 +22,10 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
 import com.sb.park.lol.navigation.ScreenNav
-import com.sb.park.lol.screen.DetailScreen
-import com.sb.park.lol.screen.DictionaryScreen
-import com.sb.park.lol.screen.SearchScreen
-import com.sb.park.lol.screen.SettingScreen
+import com.sb.park.lol.screen.detail.DetailScreen
+import com.sb.park.lol.screen.dictionary.DictionaryScreen
+import com.sb.park.lol.screen.search.SearchScreen
+import com.sb.park.lol.screen.setting.SettingScreen
 import com.sb.park.lol.utils.KeyFile
 import com.sb.park.lol.viewmodels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint

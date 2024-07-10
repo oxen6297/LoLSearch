@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen
+package com.sb.park.lol.screen.search
 
 import androidx.compose.runtime.Composable
 

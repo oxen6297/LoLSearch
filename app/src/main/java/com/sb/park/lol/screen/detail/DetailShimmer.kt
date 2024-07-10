@@ -110,9 +110,9 @@ fun SkillShimmer(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
-fun DetailShimmerPreview(showSystemUi: Boolean = true) {
+fun DetailShimmerPreview() {
     LoLSearchTheme {
         DetailShimmer()
     }

@@ -79,9 +79,9 @@ fun DetailShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ImageShimmer() {
+fun ImageShimmer(modifier: Modifier = Modifier) {
     ShimmerSpacer(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1.6f),
         shape = RectangleShape
@@ -98,17 +98,17 @@ fun TitleShimmer(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         ShimmerSpacer(
-            modifier = Modifier
+            modifier = modifier
                 .width(80.dp)
                 .height(30.dp)
         )
         ShimmerSpacer(
-            modifier = Modifier
+            modifier = modifier
                 .width(70.dp)
                 .height(25.dp)
         )
         ShimmerSpacer(
-            modifier = Modifier
+            modifier = modifier
                 .width(70.dp)
                 .height(25.dp)
         )
@@ -125,13 +125,13 @@ fun DescriptionShimmer(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         ShimmerSpacer(
-            modifier = Modifier
+            modifier = modifier
                 .width(180.dp)
                 .height(30.dp)
         )
         repeat(3) {
             ShimmerSpacer(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .height(20.dp)
             )

@@ -126,7 +126,7 @@ fun ChampionShimmer(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(3) {
-            ItemShimmer(modifier = Modifier.weight(1f))
+            ItemShimmer(modifier = modifier.weight(1f))
         }
     }
 }
@@ -140,16 +140,16 @@ fun ItemShimmer(modifier: Modifier = Modifier) {
     ) {
         repeat(3) {
             ShimmerSpacer(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .aspectRatio(0.7f)
             )
             ShimmerSpacer(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .height(30.dp)
             )
-            ShimmerSpacer(modifier = Modifier.height(20.dp))
+            ShimmerSpacer(modifier = modifier.height(20.dp))
         }
     }
 }

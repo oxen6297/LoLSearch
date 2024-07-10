@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class ChampionInfoModel(
     @PrimaryKey val id: String,
+    val version: String,
     val name: String,
     val title: String,
     val lore: String,

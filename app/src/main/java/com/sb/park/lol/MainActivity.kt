@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val coroutineScope = rememberCoroutineScope()
                 val snackBarHostState = remember { SnackbarHostState() }
-                val onShowSnackBar: (throwable: Throwable?) -> Unit = { throwable ->
+                val showErrorSnackBar: (throwable: Throwable?) -> Unit = { throwable ->
                     coroutineScope.launch {
                         snackBarHostState.showSnackbar(
                             when (throwable) {
@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         composable(route = BottomNavItem.Dictionary.route) {
-                            DictionaryScreen(onShowSnackBar, navController)
+                            DictionaryScreen(showErrorSnackBar, navController)
                         }
                         composable(route = BottomNavItem.Search.route) {
                             SearchScreen()
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            DetailScreen(onShowSnackBar)
+                            DetailScreen(showErrorSnackBar)
                         }
                     }
                 }

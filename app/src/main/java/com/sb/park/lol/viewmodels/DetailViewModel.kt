@@ -19,9 +19,9 @@ class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val championName: String = checkNotNull(savedStateHandle[KeyFile.CHAMPION_NAME])
+    private val championId: String = checkNotNull(savedStateHandle[KeyFile.CHAMPION_ID])
 
-    val uiStateFlow: StateFlow<UiState<ChampionInfoModel>> = championInfoUseCase(championName).stateIn(
+    val uiStateFlow: StateFlow<UiState<ChampionInfoModel>> = championInfoUseCase(championId).stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
         initialValue = UiState.Loading

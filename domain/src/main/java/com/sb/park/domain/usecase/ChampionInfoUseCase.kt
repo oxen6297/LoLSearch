@@ -8,6 +8,6 @@ import javax.inject.Inject
 
 class ChampionInfoUseCase @Inject constructor(private val championRepository: ChampionRepository) {
 
-    operator fun invoke(name: String): Flow<UiState<ChampionInfoModel>> =
-        championRepository.fetchChampionInfo(name)
+    operator fun invoke(championId: String): Flow<UiState<ChampionInfoModel>> =
+        championRepository.fetchChampionInfo(championId)
 }

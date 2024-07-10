@@ -40,7 +40,7 @@ internal class ChampionRepositoryImpl @Inject constructor(
         }
     }.flowOn(coroutineDispatcher)
 
-    override fun fetchChampionInfo(name: String): Flow<UiState<ChampionInfoModel>> = safeFlow {
+    override fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>> = safeFlow {
 
         val dbChampionInfo = championInfoDao.getChampion()
 
@@ -49,7 +49,7 @@ internal class ChampionRepositoryImpl @Inject constructor(
         }
 
         val version = dataStoreRepository.getVersion.first()
-        dataDragonService.getChampionInfo(version, name).data.values.first().toModel()
+        dataDragonService.getChampionInfo(version, championId).data.values.first().toModel()
             .also { champion ->
                 championInfoDao.insertChampion(champion)
             }

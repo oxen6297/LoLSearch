@@ -25,7 +25,7 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
-import com.sb.park.lol.navigation.ScreenNav
+import com.sb.park.lol.navigation.navigateToDetailScreen
 import com.sb.park.lol.utils.splashImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
@@ -90,7 +90,7 @@ fun ChampionItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigate("${ScreenNav.DETAIL.route}/${championModel.id}") },
+        modifier = modifier.clickable { navController.navigateToDetailScreen(championModel.id) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
                             SettingScreen()
                         }
                         composable(
-                            route = "${ScreenNav.DETAIL.route}/${KeyFile.CHAMPION_ID}",
+                            route = "${ScreenNav.DETAIL.route}/{${KeyFile.CHAMPION_ID}}",
                             arguments = listOf(
                                 navArgument(KeyFile.CHAMPION_ID) {
                                     type = NavType.StringType

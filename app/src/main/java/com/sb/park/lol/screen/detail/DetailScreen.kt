@@ -14,8 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,8 +29,8 @@ import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
-import com.sb.park.lol.utils.spellImage
 import com.sb.park.lol.utils.skinImage
+import com.sb.park.lol.utils.spellImage
 import com.sb.park.lol.utils.splashImage
 import com.sb.park.lol.viewmodels.DetailViewModel
 import com.sb.park.model.ChampionInfoModel
@@ -56,9 +54,7 @@ fun DetailScreen(
 @Composable
 fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.Start,
     ) {

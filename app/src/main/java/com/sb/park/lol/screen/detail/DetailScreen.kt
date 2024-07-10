@@ -31,7 +31,7 @@ import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
-import com.sb.park.lol.utils.skillImage
+import com.sb.park.lol.utils.spellImage
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.splashImage
 import com.sb.park.lol.viewmodels.DetailViewModel
@@ -182,7 +182,7 @@ fun SpellItem(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             AsyncImage(
-                model = skillImage(version, SpellEnum.getSpell(index, championId)),
+                model = spellImage(version, SpellEnum.getSpell(index, championId)),
                 contentDescription = spell.name,
                 placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 error = painterResource(id = R.drawable.ic_launcher_foreground)

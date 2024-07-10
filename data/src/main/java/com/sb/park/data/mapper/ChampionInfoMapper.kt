@@ -7,7 +7,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
 
     override fun asModel(response: ChampionInfoResponse): ChampionInfoModel = ChampionInfoModel(
         id = response.id,
-        version = response.version,
+        version = response.version ?: "14.12.1",
         name = response.name,
         title = response.title,
         lore = response.lore,

@@ -17,7 +17,7 @@ data class ChampionInfoModel(
     val passive: PassiveModel,
 ) {
     data class ImageModel(
-        val fileName: String
+        val fileName: String?
     )
 
     data class SkinModel(

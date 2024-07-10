@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ChampionInfoResponse(
     @field:Json(name = "id") val id: String,
-    @field:Json(name = "version") val version: String,
+    @field:Json(name = "version") val version: String?,
     @field:Json(name = "name") val name: String,
     @field:Json(name = "title") val title: String,
     @field:Json(name = "lore") val lore: String,
@@ -19,7 +19,7 @@ data class ChampionInfoResponse(
 
     @JsonClass(generateAdapter = true)
     data class ImageResponse(
-        @field:Json(name = "full") val fileName: String
+        @field:Json(name = "full") val fileName: String?
     )
 
     @JsonClass(generateAdapter = true)

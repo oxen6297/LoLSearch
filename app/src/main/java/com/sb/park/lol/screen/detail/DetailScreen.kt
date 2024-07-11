@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -54,7 +54,9 @@ fun DetailScreen(
 @Composable
 fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.Start,
     ) {
@@ -147,20 +149,17 @@ fun Spells(
     spells: ImmutableList<ChampionInfoModel.SpellModel>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
+    Column(
         modifier = modifier
             .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        itemsIndexed(
-            items = spells,
-            key = { _, spell -> spell.id }
-        ) { index, spell ->
+        repeat(spells.size) { index ->
             SpellItem(
                 championId = championId,
                 version = version,
-                spell = spell,
+                spell = spells[index],
                 index = index
             )
         }
@@ -179,13 +178,13 @@ fun SpellItem(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp)
+        verticalAlignment = Alignment.Top,
+        horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         Column(
             modifier = modifier.wrapContentWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             AsyncImage(
                 model = spellImage(version, "${championId}${SpellEnum.getSpell(index)}"),
@@ -210,7 +209,7 @@ fun SpellItem(
             )
             Text(
                 text = spell.description,
-                style = LoLTheme.typography.titleSmallSB
+                style = LoLTheme.typography.contentSmall
             )
         }
     }
@@ -225,7 +224,8 @@ fun Skins(
     LazyRow(
         modifier = modifier
             .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp)
+            .padding(start = 20.dp, end = 20.dp),
+        horizontalArrangement = Arrangement.spacedBy(25.dp)
     ) {
         items(
             items = skins,

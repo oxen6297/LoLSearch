@@ -97,7 +97,11 @@ fun ChampionImage(
 }
 
 @Composable
-fun Title(championName: String, tags: ImmutableList<String>, modifier: Modifier = Modifier) {
+fun Title(
+    championName: String,
+    tags: ImmutableList<String>,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier
             .wrapContentSize()
@@ -119,7 +123,10 @@ fun Title(championName: String, tags: ImmutableList<String>, modifier: Modifier 
 }
 
 @Composable
-fun Lore(lore: String, modifier: Modifier = Modifier) {
+fun Lore(
+    lore: String,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -146,7 +153,10 @@ fun Spells(
             .fillMaxWidth()
             .wrapContentHeight()
     ) {
-        itemsIndexed(items = spells, key = { _, spell -> spell.id }) { index, spell ->
+        itemsIndexed(
+            items = spells,
+            key = { _, spell -> spell.id }
+        ) { index, spell ->
             SpellItem(
                 championId = championId,
                 version = version,
@@ -178,7 +188,7 @@ fun SpellItem(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             AsyncImage(
-                model = spellImage(version, SpellEnum.getSpell(index, championId)),
+                model = spellImage(version, "${championId}${SpellEnum.getSpell(index)}"),
                 contentDescription = spell.name,
                 placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 error = painterResource(id = R.drawable.ic_launcher_foreground)

@@ -41,7 +41,7 @@ fun DictionaryScreen(
     val championUiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
     when (championUiState) {
-        is UiState.Loading -> ChampionShimmer()
+        is UiState.Loading -> DictionaryShimmer()
         is UiState.Success -> {
             ChampionList(
                 championList = championUiState.onSuccess().toImmutableList(),

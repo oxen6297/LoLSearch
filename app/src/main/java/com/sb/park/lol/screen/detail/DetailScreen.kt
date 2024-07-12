@@ -157,10 +157,9 @@ fun Spells(
     ) {
         repeat(spells.size) { index ->
             SpellItem(
-                championId = championId,
                 version = version,
                 spell = spells[index],
-                index = index
+                spellKey = "${championId}${SpellEnum.getSpell(index)}"
             )
         }
     }
@@ -168,10 +167,9 @@ fun Spells(
 
 @Composable
 fun SpellItem(
-    championId: String,
     version: String,
     spell: ChampionInfoModel.SpellModel,
-    index: Int,
+    spellKey: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -187,7 +185,7 @@ fun SpellItem(
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             AsyncImage(
-                model = spellImage(version, "${championId}${SpellEnum.getSpell(index)}"),
+                model = spellImage(version, spellKey),
                 contentDescription = spell.name,
                 placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 error = painterResource(id = R.drawable.ic_launcher_foreground)

@@ -15,6 +15,7 @@ val SKY_BLUE = Color(0xFF0397AB)
 val MINT = Color(0xFF0AC8B9)
 val TEAL = Color(0xFFCDFAFA)
 val DARK_TEAL = Color(0xFF0A323C)
+val YELLOW = Color(0xFFC7AE13)
 
 /**
  * MATCH Color

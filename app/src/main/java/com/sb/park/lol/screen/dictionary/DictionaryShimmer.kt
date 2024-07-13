@@ -38,7 +38,7 @@ fun DictionaryShimmer(modifier: Modifier = Modifier) {
 fun ChampionShimmer(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier.background(color = MaterialTheme.colorScheme.surface),
-        verticalArrangement = Arrangement.spacedBy(25.dp),
+        verticalArrangement = Arrangement.spacedBy(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(4) {

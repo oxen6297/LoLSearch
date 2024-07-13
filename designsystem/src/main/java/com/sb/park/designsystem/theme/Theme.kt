@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalView
@@ -26,7 +25,11 @@ private val DarkColorScheme = darkColorScheme(
     surface = NAVY,
     onSurface = WHITE,
     onSurfaceVariant = WHITE,
-    outline = NAVY10
+    outline = NAVY10,
+    surfaceTint = YELLOW,
+    surfaceContainer = DARK_BLUE,
+    surfaceDim = BLACK,
+    surfaceVariant = WIN_BLUE
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -40,7 +43,11 @@ private val LightColorScheme = lightColorScheme(
     surface = NAVY,
     onSurface = WHITE,
     onSurfaceVariant = WHITE,
-    outline = NAVY10
+    outline = NAVY10,
+    surfaceTint = YELLOW,
+    surfaceContainer = DARK_BLUE,
+    surfaceDim = BLACK,
+    surfaceVariant = WIN_BLUE
 )
 
 val LocalDarkTheme = compositionLocalOf { true }

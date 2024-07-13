@@ -1,5 +1,6 @@
 package com.sb.park.lol.screen.detail
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -7,13 +8,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,6 +29,7 @@ import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
+import com.sb.park.designsystem.widget.MarginSpacer
 import com.sb.park.lol.R
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.spellImage
@@ -56,7 +58,8 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
     Column(
         modifier = modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .verticalScroll(rememberScrollState())
+            .padding(bottom = 50.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.Start,
     ) {
@@ -68,14 +71,14 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
             championName = championInfoModel.name,
             tags = championInfoModel.tags.toImmutableList()
         )
-        Lore(
-            lore = championInfoModel.lore
-        )
+        Lore(lore = championInfoModel.lore)
+        MarginSpacer(marginValue = 10.dp)
         Spells(
             championId = championInfoModel.id,
             version = championInfoModel.version,
             spells = championInfoModel.spells.toImmutableList()
         )
+        MarginSpacer(marginValue = 10.dp)
         Skins(
             championId = championInfoModel.id,
             skins = championInfoModel.skins.toImmutableList()
@@ -105,21 +108,28 @@ fun Title(
     modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = modifier
-            .wrapContentSize()
-            .padding(start = 20.dp),
+        modifier = modifier.padding(start = 20.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = championName,
-            style = LoLTheme.typography.titleMediumSB
+            style = LoLTheme.typography.titleLargeSB
         )
         tags.forEach { tag ->
-            Text(
-                text = tag,
-                style = LoLTheme.typography.titleSmallSB
-            )
+            Box(
+                modifier = modifier
+                    .background(
+                        shape = RoundedCornerShape(10.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant
+                    )
+                    .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 10.dp),
+            ) {
+                Text(
+                    text = tag,
+                    style = LoLTheme.typography.titleSmallSB
+                )
+            }
         }
     }
 }
@@ -137,7 +147,7 @@ fun Lore(
     ) {
         Text(
             text = lore,
-            style = LoLTheme.typography.contentSmall
+            style = LoLTheme.typography.contentMedium
         )
     }
 }
@@ -152,14 +162,14 @@ fun Spells(
     Column(
         modifier = modifier
             .padding(start = 20.dp, end = 20.dp)
-            .fillMaxWidth()
-            .wrapContentHeight()
+            .background(color = MaterialTheme.colorScheme.primary)
     ) {
-        repeat(spells.size) { index ->
+        spells.forEachIndexed { index, spell ->
             SpellItem(
                 version = version,
-                spell = spells[index],
-                spellKey = "${championId}${SpellEnum.getSpell(index)}"
+                championId = championId,
+                index = index,
+                spell = spell
             )
         }
     }
@@ -168,43 +178,52 @@ fun Spells(
 @Composable
 fun SpellItem(
     version: String,
+    championId: String,
+    index: Int,
     spell: ChampionInfoModel.SpellModel,
-    spellKey: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .padding(15.dp),
         verticalAlignment = Alignment.Top,
-        horizontalArrangement = Arrangement.spacedBy(20.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Column(
-            modifier = modifier.wrapContentWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp)
-        ) {
-            AsyncImage(
-                model = spellImage(version, spellKey),
-                contentDescription = spell.name,
-                placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
-                error = painterResource(id = R.drawable.ic_launcher_foreground)
-            )
-            Text(
-                text = spell.id,
-                style = LoLTheme.typography.titleSmallSB
-            )
-        }
-
+        AsyncImage(
+            modifier = modifier.size(60.dp),
+            model = spellImage(version, "${championId}${SpellEnum.getSpell(index)}"),
+            contentDescription = spell.name,
+            placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
+            error = painterResource(id = R.drawable.ic_launcher_foreground)
+        )
         Column(
             modifier = modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+            verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
-            Text(
-                text = spell.name,
-                style = LoLTheme.typography.titleSmallSB
-            )
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = spell.name,
+                    style = LoLTheme.typography.titleSmallSB,
+                    color = MaterialTheme.colorScheme.surfaceTint
+                )
+                Box(
+                    modifier = modifier
+                        .background(
+                            shape = RoundedCornerShape(5.dp),
+                            color = MaterialTheme.colorScheme.surfaceDim
+                        )
+                        .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 10.dp),
+                ) {
+                    Text(
+                        text = SpellEnum.entries[index].name,
+                        style = LoLTheme.typography.contentSmallSB
+                    )
+                }
+            }
             Text(
                 text = spell.description,
                 style = LoLTheme.typography.contentSmall
@@ -220,10 +239,8 @@ fun Skins(
     modifier: Modifier = Modifier
 ) {
     LazyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 20.dp, end = 20.dp),
-        horizontalArrangement = Arrangement.spacedBy(25.dp)
+        modifier = modifier.padding(start = 20.dp, end = 20.dp),
+        horizontalArrangement = Arrangement.spacedBy(40.dp)
     ) {
         items(
             items = skins,
@@ -240,16 +257,13 @@ fun Skins(
 @Composable
 fun SkinItem(
     championId: String,
-    skin: ChampionInfoModel.SkinModel,
-    modifier: Modifier = Modifier
+    skin: ChampionInfoModel.SkinModel
 ) {
     Column(
-        modifier = modifier.wrapContentSize(),
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            modifier = modifier.wrapContentSize(),
             model = skinImage(championId, skin.num),
             contentDescription = skin.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),

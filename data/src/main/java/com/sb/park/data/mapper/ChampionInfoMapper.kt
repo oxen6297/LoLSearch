@@ -28,7 +28,9 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         map { skin ->
             ChampionInfoModel.SkinModel(
                 num = skin.num,
-                name = skin.name
+                name = skin.name.takeUnless {
+                    it == "default"
+                } ?: "기본"
             )
         }
 

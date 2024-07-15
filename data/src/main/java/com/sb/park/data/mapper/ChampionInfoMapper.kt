@@ -28,9 +28,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         map { skin ->
             ChampionInfoModel.SkinModel(
                 num = skin.num,
-                name = skin.name.takeUnless {
-                    it == "default"
-                } ?: "기본"
+                name = skin.name.takeUnless { skinName -> skinName == "default" } ?: "기본"
             )
         }
 
@@ -48,7 +46,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
     private fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
         ChampionInfoModel.PassiveModel(
             name = this.name,
-            description = this.description,
+            description = this.description.replace("<br>", "\n"),
             image = this.image.toModel()
         )
 }

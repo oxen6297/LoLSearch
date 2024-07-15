@@ -28,7 +28,7 @@ private val DarkColorScheme = darkColorScheme(
     outline = NAVY10,
     surfaceTint = YELLOW,
     surfaceContainer = DARK_BLUE,
-    surfaceDim = BLACK,
+    surfaceDim = DARK_TEAL,
     surfaceVariant = WIN_BLUE
 )
 
@@ -46,7 +46,7 @@ private val LightColorScheme = lightColorScheme(
     outline = NAVY10,
     surfaceTint = YELLOW,
     surfaceContainer = DARK_BLUE,
-    surfaceDim = BLACK,
+    surfaceDim = DARK_TEAL,
     surfaceVariant = WIN_BLUE
 )
 

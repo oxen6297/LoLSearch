@@ -21,6 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -31,9 +32,10 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.MarginSpacer
 import com.sb.park.lol.R
+import com.sb.park.lol.utils.passiveImage
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.spellImage
-import com.sb.park.lol.utils.splashImage
+import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.viewmodels.DetailViewModel
 import com.sb.park.model.ChampionInfoModel
 import kotlinx.collections.immutable.ImmutableList
@@ -76,7 +78,8 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
         Spells(
             championId = championInfoModel.id,
             version = championInfoModel.version,
-            spells = championInfoModel.spells.toImmutableList()
+            spells = championInfoModel.spells.toImmutableList(),
+            passive = championInfoModel.passive
         )
         MarginSpacer(marginValue = 10.dp)
         Skins(
@@ -94,7 +97,7 @@ fun ChampionImage(
 ) {
     AsyncImage(
         modifier = modifier.fillMaxWidth(),
-        model = splashImage(championId),
+        model = championImage(championId),
         contentDescription = championName,
         placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
         error = painterResource(id = R.drawable.ic_launcher_foreground)
@@ -157,6 +160,7 @@ fun Spells(
     championId: String,
     version: String,
     spells: ImmutableList<ChampionInfoModel.SpellModel>,
+    passive: ChampionInfoModel.PassiveModel,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -164,12 +168,18 @@ fun Spells(
             .padding(start = 20.dp, end = 20.dp)
             .background(color = MaterialTheme.colorScheme.primary)
     ) {
+        SpellItem(
+            imageModel = passiveImage(version, championId),
+            spellName = passive.name,
+            spellDescription = passive.description,
+            spellKey = stringResource(id = R.string.passive),
+        )
         spells.forEachIndexed { index, spell ->
             SpellItem(
-                version = version,
-                championId = championId,
-                index = index,
-                spell = spell
+                imageModel = spellImage(version, SpellEnum.getSpell(championId, index)),
+                spellName = spell.name,
+                spellDescription = spell.description,
+                spellKey = SpellEnum.entries[index].name
             )
         }
     }
@@ -177,10 +187,10 @@ fun Spells(
 
 @Composable
 fun SpellItem(
-    version: String,
-    championId: String,
-    index: Int,
-    spell: ChampionInfoModel.SpellModel,
+    imageModel: String,
+    spellName: String,
+    spellDescription: String,
+    spellKey: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -192,8 +202,8 @@ fun SpellItem(
     ) {
         AsyncImage(
             modifier = modifier.size(60.dp),
-            model = spellImage(version, "${championId}${SpellEnum.getSpell(index)}"),
-            contentDescription = spell.name,
+            model = imageModel,
+            contentDescription = spellName,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)
         )
@@ -206,7 +216,7 @@ fun SpellItem(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = spell.name,
+                    text = spellName,
                     style = LoLTheme.typography.titleSmallSB,
                     color = MaterialTheme.colorScheme.surfaceTint
                 )
@@ -219,13 +229,13 @@ fun SpellItem(
                         .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 10.dp),
                 ) {
                     Text(
-                        text = SpellEnum.entries[index].name,
+                        text = spellKey,
                         style = LoLTheme.typography.contentSmallSB
                     )
                 }
             }
             Text(
-                text = spell.description,
+                text = spellDescription,
                 style = LoLTheme.typography.contentSmall
             )
         }

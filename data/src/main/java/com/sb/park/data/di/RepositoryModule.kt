@@ -4,8 +4,6 @@ import com.sb.park.data.repository.ChampionRepository
 import com.sb.park.data.repository.ChampionRepositoryImpl
 import com.sb.park.data.repository.DataStoreRepository
 import com.sb.park.data.repository.DataStoreRepositoryImpl
-import com.sb.park.data.repository.VersionRepository
-import com.sb.park.data.repository.VersionRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,7 +18,4 @@ internal abstract class RepositoryModule {
 
     @Binds
     abstract fun provideChampionRepository(championRepositoryImpl: ChampionRepositoryImpl): ChampionRepository
-
-    @Binds
-    abstract fun provideVersionRepository(versionRepositoryImpl: VersionRepositoryImpl): VersionRepository
 }

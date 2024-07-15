@@ -25,9 +25,9 @@ internal class ChampionRepositoryImpl @Inject constructor(
 ) : ChampionRepository {
 
     override fun fetchChampion(): Flow<UiState<List<ChampionModel>>> = safeFlow {
+        fetchVersion()
 
         val dbChampionList = championDao.getChampionList()
-
         if (dbChampionList.isNotEmpty()) {
             return@safeFlow dbChampionList
         }
@@ -41,7 +41,6 @@ internal class ChampionRepositoryImpl @Inject constructor(
     }.flowOn(coroutineDispatcher)
 
     override fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>> = safeFlow {
-
         championInfoDao.getChampion(championId)?.let { dbChampionInfo ->
             return@safeFlow dbChampionInfo
         }
@@ -52,4 +51,17 @@ internal class ChampionRepositoryImpl @Inject constructor(
                 championInfoDao.insertChampion(champion)
             }
     }.flowOn(coroutineDispatcher)
+
+    override suspend fun fetchVersion() {
+        val myVersion = dataStoreRepository.getVersion.first()
+        val serverVersion = dataDragonService.getVersion().first()
+
+        if (myVersion == serverVersion) {
+            return
+        }
+
+        championDao.deleteChampionList()
+        championInfoDao.deleteChampion()
+        dataStoreRepository.saveVersion(serverVersion)
+    }
 }

@@ -10,5 +10,7 @@ interface ChampionRepository {
     fun fetchChampion(): Flow<UiState<List<ChampionModel>>>
 
     fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>>
+
+    suspend fun fetchVersion()
 }
 

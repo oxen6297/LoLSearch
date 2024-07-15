@@ -69,20 +69,20 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
             championId = championInfoModel.id,
             championName = championInfoModel.name
         )
-        Title(
+        TitleRow(
             championName = championInfoModel.name,
             tags = championInfoModel.tags.toImmutableList()
         )
-        Lore(lore = championInfoModel.lore)
+        LoreBox(lore = championInfoModel.lore)
         MarginSpacer(marginValue = 10.dp)
-        Spells(
+        SpellsColumn(
             championId = championInfoModel.id,
             version = championInfoModel.version,
             spells = championInfoModel.spells.toImmutableList(),
             passive = championInfoModel.passive
         )
         MarginSpacer(marginValue = 10.dp)
-        Skins(
+        SkinsColumn(
             championId = championInfoModel.id,
             skins = championInfoModel.skins.toImmutableList()
         )
@@ -105,7 +105,7 @@ fun ChampionImage(
 }
 
 @Composable
-fun Title(
+fun TitleRow(
     championName: String,
     tags: ImmutableList<String>,
     modifier: Modifier = Modifier
@@ -138,7 +138,7 @@ fun Title(
 }
 
 @Composable
-fun Lore(
+fun LoreBox(
     lore: String,
     modifier: Modifier = Modifier
 ) {
@@ -156,7 +156,7 @@ fun Lore(
 }
 
 @Composable
-fun Spells(
+fun SpellsColumn(
     championId: String,
     version: String,
     spells: ImmutableList<ChampionInfoModel.SpellModel>,
@@ -243,7 +243,7 @@ fun SpellItem(
 }
 
 @Composable
-fun Skins(
+fun SkinsColumn(
     championId: String,
     skins: ImmutableList<ChampionInfoModel.SkinModel>,
     modifier: Modifier = Modifier

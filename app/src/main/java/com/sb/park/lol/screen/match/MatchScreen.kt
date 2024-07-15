@@ -1,8 +1,8 @@
-package com.sb.park.lol.screen.search
+package com.sb.park.lol.screen.match
 
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SearchScreen() {
+fun MatchScreen() {
     //TODO SearchScreen
 }

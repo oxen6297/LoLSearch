@@ -32,10 +32,10 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.MarginSpacer
 import com.sb.park.lol.R
+import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.utils.passiveImage
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.spellImage
-import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.viewmodels.DetailViewModel
 import com.sb.park.model.ChampionInfoModel
 import kotlinx.collections.immutable.ImmutableList
@@ -76,7 +76,6 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
         LoreBox(lore = championInfoModel.lore)
         MarginSpacer(marginValue = 10.dp)
         SpellsColumn(
-            championId = championInfoModel.id,
             version = championInfoModel.version,
             spells = championInfoModel.spells.toImmutableList(),
             passive = championInfoModel.passive
@@ -157,7 +156,6 @@ fun LoreBox(
 
 @Composable
 fun SpellsColumn(
-    championId: String,
     version: String,
     spells: ImmutableList<ChampionInfoModel.SpellModel>,
     passive: ChampionInfoModel.PassiveModel,
@@ -169,14 +167,14 @@ fun SpellsColumn(
             .background(color = MaterialTheme.colorScheme.primary)
     ) {
         SpellItem(
-            imageModel = passiveImage(version, championId),
+            imageModel = passiveImage(version, passive.image.fileName),
             spellName = passive.name,
             spellDescription = passive.description,
             spellKey = stringResource(id = R.string.passive),
         )
         spells.forEachIndexed { index, spell ->
             SpellItem(
-                imageModel = spellImage(version, SpellEnum.getSpell(championId, index)),
+                imageModel = spellImage(version, spell.image.fileName),
                 spellName = spell.name,
                 spellDescription = spell.description,
                 spellKey = SpellEnum.entries[index].name

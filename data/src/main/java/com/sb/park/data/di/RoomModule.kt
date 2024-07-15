@@ -9,6 +9,7 @@ import com.sb.park.data.room.LOLDataBase
 import com.sb.park.data.room.PassiveTypeConverter
 import com.sb.park.data.room.SkinTypeConverter
 import com.sb.park.data.room.SpellTypeConverter
+import com.sb.park.data.room.StatsTypeConverter
 import com.sb.park.data.room.StringListTypeConverter
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,7 @@ object RoomModule {
     fun provideLoLDatabase(
         @ApplicationContext context: Context,
         imageTypeConverter: ImageTypeConverter,
+        statsTypeConverter: StatsTypeConverter,
         stringListTypeConverter: StringListTypeConverter,
         skinTypeConverter: SkinTypeConverter,
         spellTypeConverter: SpellTypeConverter,
@@ -33,6 +35,7 @@ object RoomModule {
     ): LOLDataBase = Room
         .databaseBuilder(context, LOLDataBase::class.java, "LOL.db")
         .addTypeConverter(imageTypeConverter)
+        .addTypeConverter(statsTypeConverter)
         .addTypeConverter(stringListTypeConverter)
         .addTypeConverter(skinTypeConverter)
         .addTypeConverter(spellTypeConverter)
@@ -46,5 +49,6 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideChampionInfoDao(lolDataBase: LOLDataBase): ChampionInfoDao = lolDataBase.championInfoDao()
+    fun provideChampionInfoDao(lolDataBase: LOLDataBase): ChampionInfoDao =
+        lolDataBase.championInfoDao()
 }

@@ -27,6 +27,25 @@ class ImageTypeConverter @Inject constructor(private val moshi: Moshi) {
 }
 
 @ProvidedTypeConverter
+class StatsTypeConverter @Inject constructor(private val moshi: Moshi) {
+
+    @TypeConverter
+    fun fromString(value: String): ChampionInfoModel.StatModel? {
+        val adapter: JsonAdapter<ChampionInfoModel.StatModel> =
+            moshi.adapter(ChampionInfoModel.StatModel::class.java)
+        return adapter.fromJson(value)
+    }
+
+    @TypeConverter
+    fun fromStat(type: ChampionInfoModel.StatModel): String {
+        val adapter: JsonAdapter<ChampionInfoModel.StatModel> =
+            moshi.adapter(ChampionInfoModel.StatModel::class.java)
+        return adapter.toJson(type)
+    }
+}
+
+
+@ProvidedTypeConverter
 class StringListTypeConverter @Inject constructor(private val moshi: Moshi) {
 
     @TypeConverter

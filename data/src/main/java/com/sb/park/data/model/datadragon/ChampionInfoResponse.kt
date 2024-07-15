@@ -12,6 +12,7 @@ data class ChampionInfoResponse(
     @field:Json(name = "lore") val lore: String,
     @field:Json(name = "image") val image: ImageResponse,
     @field:Json(name = "tags") val tags: List<String>,
+    @field:Json(name = "stats") val stats: StatResponse,
     @field:Json(name = "skins") val skins: List<SkinResponse>,
     @field:Json(name = "spells") val spells: List<SpellResponse>,
     @field:Json(name = "passive") val passive: PassiveResponse,
@@ -19,7 +20,18 @@ data class ChampionInfoResponse(
 
     @JsonClass(generateAdapter = true)
     data class ImageResponse(
-        @field:Json(name = "full") val fileName: String?
+        @field:Json(name = "full") val full: String
+    )
+
+    @JsonClass(generateAdapter = true)
+    data class StatResponse(
+        @field:Json(name = "hp") val hp: Int,
+        @field:Json(name = "mp") val mp: Int,
+        @field:Json(name = "movespeed") val movespeed: Int,
+        @field:Json(name = "armor") val armor: Int,
+        @field:Json(name = "attackrange") val attackrange: Int,
+        @field:Json(name = "attackdamage") val attackdamage: Int,
+        @field:Json(name = "attackspeed") val attackspeed: Float,
     )
 
     @JsonClass(generateAdapter = true)

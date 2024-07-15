@@ -7,12 +7,13 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
 
     override fun asModel(response: ChampionInfoResponse): ChampionInfoModel = ChampionInfoModel(
         id = response.id,
-        version = response.version ?: "14.12.1",
+        version = response.version ?: "14.13.1",
         name = response.name,
         title = response.title,
         lore = response.lore,
         image = response.image.toModel(),
         tags = response.tags,
+        stats = response.stats.toModel(),
         skins = response.skins.toModel(),
         spells = response.spells.toModel(),
         passive = response.passive.toModel()
@@ -20,7 +21,18 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
 
     private fun ChampionInfoResponse.ImageResponse.toModel(): ChampionInfoModel.ImageModel =
         ChampionInfoModel.ImageModel(
-            fileName = this.fileName
+            fileName = this.full
+        )
+
+    private fun ChampionInfoResponse.StatResponse.toModel(): ChampionInfoModel.StatModel =
+        ChampionInfoModel.StatModel(
+            hp = this.hp,
+            mp = this.mp,
+            moveSpeed = this.movespeed,
+            armor = this.armor,
+            attackRange = this.attackrange,
+            attackDamage = this.attackdamage,
+            attackSpeed = this.attackspeed
         )
 
     @JvmName("SkinToModel")

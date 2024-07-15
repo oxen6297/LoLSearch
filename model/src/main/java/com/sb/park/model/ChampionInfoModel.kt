@@ -12,12 +12,23 @@ data class ChampionInfoModel(
     val lore: String,
     val image: ImageModel,
     val tags: List<String>,
+    val stats: StatModel,
     val skins: List<SkinModel>,
     val spells: List<SpellModel>,
     val passive: PassiveModel,
 ) {
     data class ImageModel(
-        val fileName: String?
+        val fileName: String
+    )
+
+    data class StatModel(
+        val hp: Int,
+        val mp: Int,
+        val moveSpeed: Int,
+        val armor: Int,
+        val attackRange: Int,
+        val attackDamage: Int,
+        val attackSpeed: Float,
     )
 
     data class SkinModel(

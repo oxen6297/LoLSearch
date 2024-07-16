@@ -9,7 +9,7 @@ enum class SpellEnum {
 }
 
 enum class StatEnum(val statName: String, val progressColor: @Composable () -> Color) {
-    Hp("체력", { MaterialTheme.colorScheme.onSurfaceVariant }),
+    Hp("체력", { MaterialTheme.colorScheme.onSecondary }),
     Mp("마나", { MaterialTheme.colorScheme.surfaceVariant }),
     Armor("방어력", { MaterialTheme.colorScheme.surfaceDim }),
     AttackDamage("공격력", { MaterialTheme.colorScheme.surfaceTint }),

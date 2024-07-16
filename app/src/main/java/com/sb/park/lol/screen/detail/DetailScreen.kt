@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -20,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -30,6 +32,7 @@ import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
+import com.sb.park.designsystem.widget.CustomGaugeBar
 import com.sb.park.designsystem.widget.MarginSpacer
 import com.sb.park.lol.R
 import com.sb.park.lol.utils.championImage
@@ -74,6 +77,7 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
             tags = championInfoModel.tags.toImmutableList()
         )
         LoreBox(lore = championInfoModel.lore)
+        StatsColumn(stat = championInfoModel.stats)
         MarginSpacer(marginValue = 10.dp)
         SpellsColumn(
             version = championInfoModel.version,
@@ -151,6 +155,55 @@ fun LoreBox(
             text = lore,
             style = LoLTheme.typography.contentMedium
         )
+    }
+}
+
+@Composable
+fun StatsColumn(
+    stat: ChampionInfoModel.StatModel,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(15.dp)
+    ) {
+        stat.toList().forEachIndexed { index, statValue ->
+            StatItem(
+                name = StatEnum.entries[index].statName,
+                statValue = statValue,
+                progressColor = StatEnum.entries[index].progressColor(),
+            )
+        }
+    }
+}
+
+@Composable
+fun StatItem(
+    name: String,
+    statValue: Int,
+    progressColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+        Text(
+            text = name,
+            style = LoLTheme.typography.contentMedium,
+            modifier = modifier.width(60.dp)
+        )
+
+        Box(contentAlignment = Alignment.Center) {
+            CustomGaugeBar(
+                progress = statValue / 800f,
+                progressColor = progressColor
+            )
+            Text(
+                text = "$statValue / 800",
+                style = LoLTheme.typography.contentSmallSB
+            )
+        }
     }
 }
 

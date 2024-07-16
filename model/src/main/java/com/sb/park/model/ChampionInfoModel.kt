@@ -29,7 +29,10 @@ data class ChampionInfoModel(
         val attackRange: Int,
         val attackDamage: Int,
         val attackSpeed: Float,
-    )
+    ) {
+        fun toList(): List<Int> =
+            listOf(hp, mp, armor, attackRange, attackDamage)
+    }
 
     data class SkinModel(
         val num: Int,

@@ -19,17 +19,18 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = WHITE,
     primaryContainer = WHITE,
     onPrimaryContainer = NAVY10,
-    inversePrimary = WHITE,
+    inversePrimary = DARK_GRAY,
     secondary = BLUE,
     onSecondary = WHITE,
     surface = NAVY,
     onSurface = WHITE,
-    onSurfaceVariant = WHITE,
+    onSurfaceVariant = LOSE_RED,
     outline = NAVY10,
     surfaceTint = YELLOW,
     surfaceContainer = DARK_BLUE,
     surfaceDim = DARK_TEAL,
-    surfaceVariant = WIN_BLUE
+    surfaceVariant = WIN_BLUE,
+    tertiary = BLACK
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -37,17 +38,18 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = WHITE,
     primaryContainer = WHITE,
     onPrimaryContainer = NAVY10,
-    inversePrimary = WHITE,
+    inversePrimary = DARK_GRAY,
     secondary = BLUE,
     onSecondary = WHITE,
     surface = NAVY,
     onSurface = WHITE,
-    onSurfaceVariant = WHITE,
+    onSurfaceVariant = LOSE_RED,
     outline = NAVY10,
     surfaceTint = YELLOW,
     surfaceContainer = DARK_BLUE,
     surfaceDim = DARK_TEAL,
-    surfaceVariant = WIN_BLUE
+    surfaceVariant = WIN_BLUE,
+    tertiary = BLACK
 )
 
 val LocalDarkTheme = compositionLocalOf { true }

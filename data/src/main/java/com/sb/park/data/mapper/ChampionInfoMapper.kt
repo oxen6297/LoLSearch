@@ -13,6 +13,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         lore = response.lore.deleteHtmlTag(),
         image = response.image.toModel(),
         tags = response.tags,
+        tips = response.allytips,
         stats = response.stats.toModel(),
         skins = response.skins.toModel(),
         spells = response.spells.toModel(),

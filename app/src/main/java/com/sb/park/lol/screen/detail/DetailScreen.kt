@@ -10,11 +10,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,7 +68,7 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
         modifier = modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(bottom = 50.dp),
+            .padding(bottom = 100.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp),
         horizontalAlignment = Alignment.Start,
     ) {
@@ -78,7 +82,7 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
         )
         LoreBox(lore = championInfoModel.lore)
         StatsColumn(stat = championInfoModel.stats)
-        MarginSpacer(marginValue = 10.dp)
+        TipColumn(tips = championInfoModel.tips.toImmutableList())
         SpellsColumn(
             version = championInfoModel.version,
             spells = championInfoModel.spells.toImmutableList(),
@@ -203,6 +207,45 @@ fun StatItem(
                 text = "$statValue / 800",
                 style = LoLTheme.typography.contentSmallSB
             )
+        }
+    }
+}
+
+@Composable
+fun TipColumn(tips: ImmutableList<String>, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(20.dp)
+    ) {
+        Row(
+            modifier = modifier.padding(bottom = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(id = R.string.champion_tip),
+                style = LoLTheme.typography.titleMediumSB
+            )
+
+            Icon(
+                imageVector = Icons.Filled.Info,
+                contentDescription = null,
+                modifier = modifier.size(30.dp)
+            )
+        }
+
+        Column(
+            modifier = modifier.background(color = MaterialTheme.colorScheme.primary)
+        ) {
+            tips.forEach { tip ->
+                Text(
+                    modifier = modifier.padding(15.dp),
+                    text = tip,
+                    style = LoLTheme.typography.contentMedium
+                )
+            }
         }
     }
 }

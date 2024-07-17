@@ -5,6 +5,7 @@
     <string name="bottom_my_page">마이페이지</string>
     <string name="champion_list">챔피언</string>
     <string name="passive">Passive</string>
+    <string name="champion_tip">챔피언 팁</string>
 
     <string name="snack_bar_error_network">네트워크 연결이 원활하지 않습니다</string>
     <string name="snack_bar_error_unknown">알 수 없는 오류가 발생하였습니다</string>

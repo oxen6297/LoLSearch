@@ -10,7 +10,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         version = response.version ?: "14.13.1",
         name = response.name,
         title = response.title,
-        lore = response.lore,
+        lore = response.lore.deleteHtmlTag(),
         image = response.image.toModel(),
         tags = response.tags,
         stats = response.stats.toModel(),
@@ -50,7 +50,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
             ChampionInfoModel.SpellModel(
                 id = spell.id,
                 name = spell.name,
-                description = spell.description,
+                description = spell.description.deleteHtmlTag(),
                 image = spell.image.toModel()
             )
         }
@@ -58,9 +58,11 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
     private fun ChampionInfoResponse.PassiveResponse.toModel(): ChampionInfoModel.PassiveModel =
         ChampionInfoModel.PassiveModel(
             name = this.name,
-            description = this.description.replace("<br>", "\n"),
+            description = this.description.deleteHtmlTag(),
             image = this.image.toModel()
         )
 }
+
+private fun String.deleteHtmlTag(): String = this.replace("<.*?>".toRegex(), "")
 
 internal fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoMapper.asModel(this)

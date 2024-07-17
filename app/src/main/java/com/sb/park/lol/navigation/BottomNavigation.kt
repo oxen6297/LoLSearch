@@ -1,6 +1,8 @@
 package com.sb.park.lol.navigation
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -27,7 +29,11 @@ fun BottomNavigation(navController: NavHostController) {
         currentRoute == item.route
     }
 
-    AnimatedVisibility(visible = visible) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
         NavigationBar(containerColor = MaterialTheme.colorScheme.primary) {
             items.forEach { item ->
                 NavigationBarItem(

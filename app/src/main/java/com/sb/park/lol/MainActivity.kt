@@ -23,7 +23,7 @@ import com.sb.park.lol.navigation.ScreenNav
 import com.sb.park.lol.screen.detail.DetailScreen
 import com.sb.park.lol.screen.dictionary.DictionaryScreen
 import com.sb.park.lol.screen.match.MatchScreen
-import com.sb.park.lol.screen.setting.SettingScreen
+import com.sb.park.lol.screen.mypage.MyPageScreen
 import com.sb.park.lol.utils.KeyFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -67,10 +67,10 @@ class MainActivity : ComponentActivity() {
                             MatchScreen()
                         }
                         composable(route = BottomNavItem.Setting.route) {
-                            SettingScreen()
+                            MyPageScreen()
                         }
                         composable(
-                            route = "${ScreenNav.DETAIL.route}/{${KeyFile.CHAMPION_ID}}",
+                            route = "${ScreenNav.Detail.route}/{${KeyFile.CHAMPION_ID}}",
                             arguments = listOf(
                                 navArgument(KeyFile.CHAMPION_ID) {
                                     type = NavType.StringType

@@ -2,7 +2,7 @@
     <string name="app_name">LoLSearch</string>
     <string name="bottom_dictionary">백과사전</string>
     <string name="bottom_search">전적검색</string>
-    <string name="bottom_setting">환경설정</string>
+    <string name="bottom_my_page">마이페이지</string>
     <string name="champion_list">챔피언</string>
     <string name="passive">Passive</string>
 

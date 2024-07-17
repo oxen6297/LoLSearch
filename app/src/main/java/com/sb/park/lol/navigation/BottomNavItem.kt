@@ -10,20 +10,20 @@ sealed class BottomNavItem(
     @StringRes val title: Int
 ) {
     data object Dictionary : BottomNavItem(
-        ScreenNav.DICTIONARY.route,
+        ScreenNav.Dictionary.route,
         R.drawable.dictionary,
         R.string.bottom_dictionary
     )
 
     data object Search : BottomNavItem(
-        ScreenNav.SEARCH.route,
+        ScreenNav.Search.route,
         R.drawable.search,
         R.string.bottom_search
     )
 
     data object Setting : BottomNavItem(
-        ScreenNav.SETTING.route,
-        R.drawable.settings,
-        R.string.bottom_setting
+        ScreenNav.MyPage.route,
+        R.drawable.my_page,
+        R.string.bottom_my_page
     )
 }

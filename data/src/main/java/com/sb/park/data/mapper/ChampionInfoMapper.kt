@@ -11,6 +11,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         name = response.name,
         title = response.title,
         lore = response.lore.deleteHtmlTag(),
+        type = response.partype,
         image = response.image.toModel(),
         tags = response.tags,
         tips = response.allytips,

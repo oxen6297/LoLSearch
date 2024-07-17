@@ -35,6 +35,8 @@ internal class ChampionRepositoryImpl @Inject constructor(
         val version = dataStoreRepository.getVersion.first()
         dataDragonService.getChampion(version).data.values.toList().map { championResponse ->
             championResponse.toModel()
+        }.sortedBy {
+            it.name
         }.also { championList ->
             championDao.insertChampion(championList)
         }

@@ -8,10 +8,14 @@ enum class SpellEnum {
     Q, W, E, R
 }
 
-enum class StatEnum(val statName: String, val progressColor: @Composable () -> Color) {
-    Hp("체력", { MaterialTheme.colorScheme.onSecondary }),
-    Mp("마나", { MaterialTheme.colorScheme.surfaceVariant }),
-    Armor("방어력", { MaterialTheme.colorScheme.surfaceDim }),
-    AttackDamage("공격력", { MaterialTheme.colorScheme.surfaceTint }),
-    AttackRange("사거리", { MaterialTheme.colorScheme.inversePrimary })
+enum class StatEnum(
+    val statName: String,
+    val progressColor: @Composable () -> Color,
+    val maxValue: Int
+) {
+    Hp("체력", { MaterialTheme.colorScheme.onSecondary },800),
+    Mp("마나", { MaterialTheme.colorScheme.surfaceVariant },800),
+    Armor("방어력", { MaterialTheme.colorScheme.surfaceDim },100),
+    AttackDamage("공격력", { MaterialTheme.colorScheme.surfaceTint },100),
+    AttackRange("사거리", { MaterialTheme.colorScheme.inversePrimary },800)
 }

@@ -38,6 +38,7 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.CustomGaugeBar
 import com.sb.park.designsystem.widget.MarginSpacer
+import com.sb.park.designsystem.widget.TextChip
 import com.sb.park.lol.R
 import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.utils.passiveImage
@@ -78,7 +79,8 @@ fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modi
         )
         TitleRow(
             championName = championInfoModel.name,
-            tags = championInfoModel.tags.toImmutableList()
+            tags = championInfoModel.tags.toImmutableList(),
+            type = championInfoModel.type
         )
         LoreBox(lore = championInfoModel.lore)
         StatsColumn(stat = championInfoModel.stats)
@@ -115,6 +117,7 @@ fun ChampionImage(
 fun TitleRow(
     championName: String,
     tags: ImmutableList<String>,
+    type: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -127,20 +130,12 @@ fun TitleRow(
             style = LoLTheme.typography.titleLargeSB
         )
         tags.forEach { tag ->
-            Box(
-                modifier = modifier
-                    .background(
-                        shape = RoundedCornerShape(10.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                    .padding(top = 5.dp, bottom = 5.dp, start = 10.dp, end = 10.dp),
-            ) {
-                Text(
-                    text = tag,
-                    style = LoLTheme.typography.titleSmallSB
-                )
-            }
+            TextChip(text = tag)
         }
+        TextChip(
+            text = type,
+            chipColor = MaterialTheme.colorScheme.error
+        )
     }
 }
 
@@ -172,10 +167,12 @@ fun StatsColumn(
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         stat.toList().forEachIndexed { index, statValue ->
+            val statInfo = StatEnum.entries[index]
             StatItem(
-                name = StatEnum.entries[index].statName,
+                name = statInfo.statName,
                 statValue = statValue,
-                progressColor = StatEnum.entries[index].progressColor(),
+                maxValue = statInfo.maxValue,
+                progressColor = statInfo.progressColor(),
             )
         }
     }
@@ -185,6 +182,7 @@ fun StatsColumn(
 fun StatItem(
     name: String,
     statValue: Int,
+    maxValue: Int,
     progressColor: Color,
     modifier: Modifier = Modifier
 ) {
@@ -200,11 +198,11 @@ fun StatItem(
 
         Box(contentAlignment = Alignment.Center) {
             CustomGaugeBar(
-                progress = statValue / 800f,
+                progress = statValue / maxValue.toFloat(),
                 progressColor = progressColor
             )
             Text(
-                text = "$statValue / 800",
+                text = "$statValue / $maxValue",
                 style = LoLTheme.typography.contentSmallSB
             )
         }
@@ -212,7 +210,10 @@ fun StatItem(
 }
 
 @Composable
-fun TipColumn(tips: ImmutableList<String>, modifier: Modifier = Modifier) {
+fun TipColumn(
+    tips: ImmutableList<String>,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -237,14 +238,24 @@ fun TipColumn(tips: ImmutableList<String>, modifier: Modifier = Modifier) {
         }
 
         Column(
-            modifier = modifier.background(color = MaterialTheme.colorScheme.primary)
+            modifier = modifier
+                .background(color = MaterialTheme.colorScheme.primary)
+                .fillMaxWidth()
         ) {
-            tips.forEach { tip ->
+            if (tips.isEmpty()) {
                 Text(
                     modifier = modifier.padding(15.dp),
-                    text = tip,
+                    text = stringResource(id = R.string.empty_tip),
                     style = LoLTheme.typography.contentMedium
                 )
+            } else {
+                tips.forEach { tip ->
+                    Text(
+                        modifier = modifier.padding(15.dp),
+                        text = tip,
+                        style = LoLTheme.typography.contentMedium
+                    )
+                }
             }
         }
     }

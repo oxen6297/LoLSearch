@@ -10,6 +10,7 @@ data class ChampionInfoResponse(
     @field:Json(name = "name") val name: String,
     @field:Json(name = "title") val title: String,
     @field:Json(name = "lore") val lore: String,
+    @field:Json(name = "partype") val partype: String,
     @field:Json(name = "image") val image: ImageResponse,
     @field:Json(name = "tags") val tags: List<String>,
     @field:Json(name = "allytips") val allytips: List<String>,

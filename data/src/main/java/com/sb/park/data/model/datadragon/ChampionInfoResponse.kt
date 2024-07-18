@@ -21,11 +21,6 @@ data class ChampionInfoResponse(
 ) {
 
     @JsonClass(generateAdapter = true)
-    data class ImageResponse(
-        @field:Json(name = "full") val full: String
-    )
-
-    @JsonClass(generateAdapter = true)
     data class StatResponse(
         @field:Json(name = "hp") val hp: Int,
         @field:Json(name = "mp") val mp: Int,

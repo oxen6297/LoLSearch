@@ -19,9 +19,6 @@ data class ChampionInfoModel(
     val spells: List<SpellModel>,
     val passive: PassiveModel,
 ) {
-    data class ImageModel(
-        val fileName: String
-    )
 
     data class StatModel(
         val hp: Int,

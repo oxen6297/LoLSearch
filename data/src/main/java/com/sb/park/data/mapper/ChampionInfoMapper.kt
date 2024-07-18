@@ -1,7 +1,9 @@
 package com.sb.park.data.mapper
 
 import com.sb.park.data.model.datadragon.ChampionInfoResponse
+import com.sb.park.data.model.datadragon.ImageResponse
 import com.sb.park.model.ChampionInfoModel
+import com.sb.park.model.ImageModel
 
 private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionInfoModel> {
 
@@ -21,10 +23,7 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         passive = response.passive.toModel()
     )
 
-    private fun ChampionInfoResponse.ImageResponse.toModel(): ChampionInfoModel.ImageModel =
-        ChampionInfoModel.ImageModel(
-            fileName = this.full
-        )
+    private fun ImageResponse.toModel(): ImageModel = ImageModel(fileName = this.full)
 
     private fun ChampionInfoResponse.StatResponse.toModel(): ChampionInfoModel.StatModel =
         ChampionInfoModel.StatModel(

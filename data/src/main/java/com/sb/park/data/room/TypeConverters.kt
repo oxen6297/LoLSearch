@@ -3,6 +3,7 @@ package com.sb.park.data.room
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.sb.park.model.ChampionInfoModel
+import com.sb.park.model.ImageModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -12,16 +13,16 @@ import javax.inject.Inject
 class ImageTypeConverter @Inject constructor(private val moshi: Moshi) {
 
     @TypeConverter
-    fun fromString(value: String): ChampionInfoModel.ImageModel? {
-        val adapter: JsonAdapter<ChampionInfoModel.ImageModel> =
-            moshi.adapter(ChampionInfoModel.ImageModel::class.java)
+    fun fromString(value: String): ImageModel? {
+        val adapter: JsonAdapter<ImageModel> =
+            moshi.adapter(ImageModel::class.java)
         return adapter.fromJson(value)
     }
 
     @TypeConverter
-    fun fromImage(type: ChampionInfoModel.ImageModel): String {
-        val adapter: JsonAdapter<ChampionInfoModel.ImageModel> =
-            moshi.adapter(ChampionInfoModel.ImageModel::class.java)
+    fun fromImage(type: ImageModel): String {
+        val adapter: JsonAdapter<ImageModel> =
+            moshi.adapter(ImageModel::class.java)
         return adapter.toJson(type)
     }
 }

@@ -50,7 +50,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun ChampionInfoScreen(
+internal fun ChampionInfoScreen(
     showSnackBar: (Throwable?) -> Unit,
     viewModel: ChampionInfoViewModel = hiltViewModel()
 ) {
@@ -64,7 +64,7 @@ fun ChampionInfoScreen(
 }
 
 @Composable
-fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
+private fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -99,7 +99,7 @@ fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: Modifier
 }
 
 @Composable
-fun ChampionImage(
+private fun ChampionImage(
     championId: String,
     championName: String,
     modifier: Modifier = Modifier
@@ -114,7 +114,7 @@ fun ChampionImage(
 }
 
 @Composable
-fun TitleRow(
+private fun TitleRow(
     championName: String,
     tags: ImmutableList<String>,
     type: String,
@@ -140,7 +140,7 @@ fun TitleRow(
 }
 
 @Composable
-fun LoreBox(
+private fun LoreBox(
     lore: String,
     modifier: Modifier = Modifier
 ) {
@@ -158,7 +158,7 @@ fun LoreBox(
 }
 
 @Composable
-fun StatsColumn(
+private fun StatsColumn(
     stat: ChampionInfoModel.StatModel,
     modifier: Modifier = Modifier
 ) {
@@ -179,7 +179,7 @@ fun StatsColumn(
 }
 
 @Composable
-fun StatItem(
+private fun StatItem(
     name: String,
     statValue: Int,
     maxValue: Int,
@@ -210,7 +210,7 @@ fun StatItem(
 }
 
 @Composable
-fun TipColumn(
+private fun TipColumn(
     tips: ImmutableList<String>,
     modifier: Modifier = Modifier
 ) {
@@ -262,7 +262,7 @@ fun TipColumn(
 }
 
 @Composable
-fun SpellsColumn(
+private fun SpellsColumn(
     version: String,
     spells: ImmutableList<ChampionInfoModel.SpellModel>,
     passive: ChampionInfoModel.PassiveModel,
@@ -291,7 +291,7 @@ fun SpellsColumn(
 }
 
 @Composable
-fun SpellItem(
+private fun SpellItem(
     imageModel: String,
     spellName: String,
     spellDescription: String,
@@ -348,7 +348,7 @@ fun SpellItem(
 }
 
 @Composable
-fun SkinsColumn(
+private fun SkinsColumn(
     championId: String,
     skins: ImmutableList<ChampionInfoModel.SkinModel>,
     modifier: Modifier = Modifier
@@ -370,7 +370,7 @@ fun SkinsColumn(
 }
 
 @Composable
-fun SkinItem(
+private fun SkinItem(
     championId: String,
     skin: ChampionInfoModel.SkinModel
 ) {

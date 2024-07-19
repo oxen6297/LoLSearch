@@ -22,7 +22,7 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
 
 @Composable
-fun ChampionInfoShimmer(modifier: Modifier = Modifier) {
+internal fun ChampionInfoShimmer(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -36,7 +36,7 @@ fun ChampionInfoShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ImageShimmer(modifier: Modifier = Modifier) {
+private fun ImageShimmer(modifier: Modifier = Modifier) {
     ShimmerSpacer(
         modifier = modifier
             .fillMaxWidth()
@@ -46,7 +46,7 @@ fun ImageShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TitleShimmer(modifier: Modifier = Modifier) {
+private fun TitleShimmer(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .wrapContentSize()
@@ -73,7 +73,7 @@ fun TitleShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun DescriptionShimmer(modifier: Modifier = Modifier) {
+private fun DescriptionShimmer(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -98,7 +98,7 @@ fun DescriptionShimmer(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SkillShimmer(modifier: Modifier = Modifier) {
+private fun SkillShimmer(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.padding(20.dp),
         contentAlignment = Alignment.TopCenter
@@ -112,7 +112,7 @@ fun SkillShimmer(modifier: Modifier = Modifier) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun DetailShimmerPreview() {
+private fun DetailShimmerPreview() {
     LoLSearchTheme {
         ChampionInfoShimmer()
     }

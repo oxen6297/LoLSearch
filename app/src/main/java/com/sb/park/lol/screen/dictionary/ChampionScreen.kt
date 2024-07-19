@@ -13,7 +13,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -23,7 +22,6 @@ import com.sb.park.designsystem.UiState
 import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
-import com.sb.park.designsystem.widget.TopBar
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToDetailScreen
 import com.sb.park.lol.utils.skinImage
@@ -34,7 +32,7 @@ import kotlinx.collections.immutable.ImmutableList
 
 
 @Composable
-fun ChampionScreen(
+internal fun ChampionScreen(
     showSnackBar: (Throwable?) -> Unit,
     navController: NavController,
     viewModel: DictionaryViewModel = hiltViewModel()
@@ -55,37 +53,31 @@ fun ChampionScreen(
 }
 
 @Composable
-fun ChampionContent(
+private fun ChampionContent(
     championList: ImmutableList<ChampionModel>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
-    Column {
-        TopBar(
-            title = stringResource(id = R.string.champion_list),
-            style = LoLTheme.typography.titleLargeSB
-        )
-        LazyVerticalGrid(
-            modifier = modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
-            columns = GridCells.Fixed(3),
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalArrangement = Arrangement.spacedBy(30.dp)
-        ) {
-            items(
-                items = championList,
-                key = { championModel -> championModel.id }
-            ) { championModel ->
-                ChampionItem(
-                    championModel = championModel,
-                    navController = navController,
-                )
-            }
+    LazyVerticalGrid(
+        modifier = modifier.padding(start = 20.dp, end = 20.dp),
+        columns = GridCells.Fixed(3),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(30.dp)
+    ) {
+        items(
+            items = championList,
+            key = { championModel -> championModel.id }
+        ) { championModel ->
+            ChampionItem(
+                championModel = championModel,
+                navController = navController,
+            )
         }
     }
 }
 
 @Composable
-fun ChampionItem(
+private fun ChampionItem(
     championModel: ChampionModel,
     navController: NavController,
     modifier: Modifier = Modifier

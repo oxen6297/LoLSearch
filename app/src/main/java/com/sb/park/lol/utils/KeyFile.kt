@@ -1,6 +1,6 @@
 package com.sb.park.lol.utils
 
-object KeyFile {
+internal object KeyFile {
     const val CHAMPION_ID = "championId"
     const val ITEM_NAME = "itemName"
 }

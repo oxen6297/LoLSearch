@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class ChampionInfoViewModel @Inject constructor(
+internal class ChampionInfoViewModel @Inject constructor(
     championInfoUseCase: ChampionInfoUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

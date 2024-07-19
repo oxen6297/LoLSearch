@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class ItemInfoViewModel @Inject constructor(
+internal class ItemInfoViewModel @Inject constructor(
     itemInfoUseCase: ItemInfoUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

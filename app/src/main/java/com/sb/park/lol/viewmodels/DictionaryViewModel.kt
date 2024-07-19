@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class DictionaryViewModel @Inject constructor(
+internal class DictionaryViewModel @Inject constructor(
     championUseCase: ChampionUseCase,
     itemUseCase: ItemUseCase
 ) : ViewModel() {

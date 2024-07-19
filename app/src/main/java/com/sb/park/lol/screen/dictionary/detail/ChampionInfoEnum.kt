@@ -4,11 +4,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-enum class SpellEnum {
+internal enum class SpellEnum {
     Q, W, E, R
 }
 
-enum class StatEnum(
+internal enum class StatEnum(
     val statName: String,
     val progressColor: @Composable () -> Color,
     val maxValue: Int

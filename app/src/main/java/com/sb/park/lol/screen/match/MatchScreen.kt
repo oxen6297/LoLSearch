@@ -3,6 +3,6 @@ package com.sb.park.lol.screen.match
 import androidx.compose.runtime.Composable
 
 @Composable
-fun MatchScreen() {
+internal fun MatchScreen() {
     //TODO SearchScreen
 }

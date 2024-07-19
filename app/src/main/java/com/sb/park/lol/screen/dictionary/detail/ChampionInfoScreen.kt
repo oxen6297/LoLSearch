@@ -54,12 +54,12 @@ fun ChampionInfoScreen(
     showSnackBar: (Throwable?) -> Unit,
     viewModel: ChampionInfoViewModel = hiltViewModel()
 ) {
-    val championUiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+    val uiStateFlow by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
-    when (championUiState) {
+    when (uiStateFlow) {
         is UiState.Loading -> ChampionInfoShimmer()
-        is UiState.Success -> ChampionInfoContent(championUiState.onSuccess())
-        is UiState.Error -> showSnackBar(championUiState.onError())
+        is UiState.Success -> ChampionInfoContent(uiStateFlow.onSuccess())
+        is UiState.Error -> showSnackBar(uiStateFlow.onError())
     }
 }
 

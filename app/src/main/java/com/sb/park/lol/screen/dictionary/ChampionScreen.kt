@@ -39,18 +39,18 @@ fun ChampionScreen(
     navController: NavController,
     viewModel: DictionaryViewModel = hiltViewModel()
 ) {
-    val championUiState by viewModel.championUiStateFlow.collectAsStateWithLifecycle()
+    val uiStateFlow by viewModel.championUiStateFlow.collectAsStateWithLifecycle()
 
-    when (championUiState) {
+    when (uiStateFlow) {
         is UiState.Loading -> ChampionShimmer()
         is UiState.Success -> {
             ChampionContent(
-                championList = championUiState.onSuccess().toImmutableList(),
+                championList = uiStateFlow.onSuccess().toImmutableList(),
                 navController = navController
             )
         }
 
-        is UiState.Error -> showSnackBar(championUiState.onError())
+        is UiState.Error -> showSnackBar(uiStateFlow.onError())
     }
 }
 

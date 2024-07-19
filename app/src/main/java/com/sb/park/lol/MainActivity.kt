@@ -20,7 +20,7 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
 import com.sb.park.lol.navigation.ScreenNav
-import com.sb.park.lol.screen.detail.DetailScreen
+import com.sb.park.lol.screen.dictionary.detail.ChampionInfoScreen
 import com.sb.park.lol.screen.dictionary.DictionaryScreen
 import com.sb.park.lol.screen.match.MatchScreen
 import com.sb.park.lol.screen.mypage.MyPageScreen
@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            DetailScreen(showErrorSnackBar)
+                            ChampionInfoScreen(showErrorSnackBar)
                         }
                     }
                 }

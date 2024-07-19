@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.detail
+package com.sb.park.lol.screen.dictionary.detail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,7 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
 
 @Composable
-fun DetailShimmer(modifier: Modifier = Modifier) {
+fun ChampionInfoShimmer(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -114,6 +114,6 @@ fun SkillShimmer(modifier: Modifier = Modifier) {
 @Composable
 fun DetailShimmerPreview() {
     LoLSearchTheme {
-        DetailShimmer()
+        ChampionInfoShimmer()
     }
 }

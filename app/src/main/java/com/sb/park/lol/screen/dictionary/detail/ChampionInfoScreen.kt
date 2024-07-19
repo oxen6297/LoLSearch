@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.detail
+package com.sb.park.lol.screen.dictionary.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -44,27 +44,27 @@ import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.utils.passiveImage
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.spellImage
-import com.sb.park.lol.viewmodels.DetailViewModel
+import com.sb.park.lol.viewmodels.ChampionInfoViewModel
 import com.sb.park.model.ChampionInfoModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun DetailScreen(
+fun ChampionInfoScreen(
     showSnackBar: (Throwable?) -> Unit,
-    viewModel: DetailViewModel = hiltViewModel()
+    viewModel: ChampionInfoViewModel = hiltViewModel()
 ) {
     val championUiState by viewModel.uiStateFlow.collectAsStateWithLifecycle()
 
     when (championUiState) {
-        is UiState.Loading -> DetailShimmer()
-        is UiState.Success -> ChampionInfo(championUiState.onSuccess())
+        is UiState.Loading -> ChampionInfoShimmer()
+        is UiState.Success -> ChampionInfoContent(championUiState.onSuccess())
         is UiState.Error -> showSnackBar(championUiState.onError())
     }
 }
 
 @Composable
-fun ChampionInfo(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
+fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()

@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.detail
+package com.sb.park.lol.screen.dictionary.detail
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

@@ -20,7 +20,7 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
 
 @Composable
-fun DictionaryShimmer(modifier: Modifier = Modifier) {
+fun ChampionShimmer(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .padding(20.dp)
@@ -29,13 +29,13 @@ fun DictionaryShimmer(modifier: Modifier = Modifier) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         repeat(3) {
-            ChampionShimmer(modifier = modifier.weight(1f))
+            ChampionItemShimmer(modifier = modifier.weight(1f))
         }
     }
 }
 
 @Composable
-fun ChampionShimmer(modifier: Modifier = Modifier) {
+fun ChampionItemShimmer(modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier.background(color = MaterialTheme.colorScheme.surface),
         verticalArrangement = Arrangement.spacedBy(30.dp),
@@ -63,6 +63,6 @@ fun ChampionShimmer(modifier: Modifier = Modifier) {
 @Composable
 fun ShimmerPreview() {
     LoLSearchTheme {
-        DictionaryShimmer()
+        ChampionShimmer()
     }
 }

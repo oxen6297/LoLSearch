@@ -24,11 +24,9 @@ data class ChampionInfoResponse(
     data class StatResponse(
         @field:Json(name = "hp") val hp: Int,
         @field:Json(name = "mp") val mp: Int,
-        @field:Json(name = "movespeed") val movespeed: Int,
         @field:Json(name = "armor") val armor: Int,
         @field:Json(name = "attackrange") val attackrange: Int,
-        @field:Json(name = "attackdamage") val attackdamage: Int,
-        @field:Json(name = "attackspeed") val attackspeed: Float,
+        @field:Json(name = "attackdamage") val attackdamage: Int
     )
 
     @JsonClass(generateAdapter = true)

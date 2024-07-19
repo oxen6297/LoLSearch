@@ -29,11 +29,9 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         ChampionInfoModel.StatModel(
             hp = this.hp,
             mp = this.mp,
-            moveSpeed = this.movespeed,
             armor = this.armor,
             attackRange = this.attackrange,
-            attackDamage = this.attackdamage,
-            attackSpeed = this.attackspeed
+            attackDamage = this.attackdamage
         )
 
     @JvmName("SkinToModel")

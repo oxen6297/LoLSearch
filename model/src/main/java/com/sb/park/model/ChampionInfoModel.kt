@@ -23,11 +23,9 @@ data class ChampionInfoModel(
     data class StatModel(
         val hp: Int,
         val mp: Int,
-        val moveSpeed: Int,
         val armor: Int,
         val attackRange: Int,
         val attackDamage: Int,
-        val attackSpeed: Float,
     ) {
         fun toList(): List<Int> = listOf(hp, mp, armor, attackDamage, attackRange)
     }

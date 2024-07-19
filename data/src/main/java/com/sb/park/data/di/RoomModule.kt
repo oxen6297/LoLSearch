@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Room
 import com.sb.park.data.room.ChampionDao
 import com.sb.park.data.room.ChampionInfoDao
+import com.sb.park.data.room.GoldTypeConverter
 import com.sb.park.data.room.ImageTypeConverter
+import com.sb.park.data.room.ItemDao
 import com.sb.park.data.room.LOLDataBase
 import com.sb.park.data.room.PassiveTypeConverter
 import com.sb.park.data.room.SkinTypeConverter
@@ -31,7 +33,8 @@ object RoomModule {
         stringListTypeConverter: StringListTypeConverter,
         skinTypeConverter: SkinTypeConverter,
         spellTypeConverter: SpellTypeConverter,
-        passiveTypeConverter: PassiveTypeConverter
+        passiveTypeConverter: PassiveTypeConverter,
+        goldTypeConverter: GoldTypeConverter
     ): LOLDataBase = Room
         .databaseBuilder(context, LOLDataBase::class.java, "LOL.db")
         .addTypeConverter(imageTypeConverter)
@@ -40,6 +43,7 @@ object RoomModule {
         .addTypeConverter(skinTypeConverter)
         .addTypeConverter(spellTypeConverter)
         .addTypeConverter(passiveTypeConverter)
+        .addTypeConverter(goldTypeConverter)
         .fallbackToDestructiveMigration()
         .build()
 
@@ -51,4 +55,8 @@ object RoomModule {
     @Singleton
     fun provideChampionInfoDao(lolDataBase: LOLDataBase): ChampionInfoDao =
         lolDataBase.championInfoDao()
+
+    @Provides
+    @Singleton
+    fun provideItemDao(lolDataBase: LOLDataBase): ItemDao = lolDataBase.ItemDao()
 }

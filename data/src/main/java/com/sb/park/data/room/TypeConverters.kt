@@ -4,6 +4,7 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.sb.park.model.ChampionInfoModel
 import com.sb.park.model.ImageModel
+import com.sb.park.model.ItemModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -118,6 +119,24 @@ class PassiveTypeConverter @Inject constructor(private val moshi: Moshi) {
     fun fromPassive(type: ChampionInfoModel.PassiveModel): String {
         val adapter: JsonAdapter<ChampionInfoModel.PassiveModel> =
             moshi.adapter(ChampionInfoModel.PassiveModel::class.java)
+        return adapter.toJson(type)
+    }
+}
+
+@ProvidedTypeConverter
+class GoldTypeConverter @Inject constructor(private val moshi: Moshi) {
+
+    @TypeConverter
+    fun fromString(value: String): ItemModel.GoldModel? {
+        val adapter: JsonAdapter<ItemModel.GoldModel> =
+            moshi.adapter(ItemModel.GoldModel::class.java)
+        return adapter.fromJson(value)
+    }
+
+    @TypeConverter
+    fun fromGold(type: ItemModel.GoldModel): String {
+        val adapter: JsonAdapter<ItemModel.GoldModel> =
+            moshi.adapter(ItemModel.GoldModel::class.java)
         return adapter.toJson(type)
     }
 }

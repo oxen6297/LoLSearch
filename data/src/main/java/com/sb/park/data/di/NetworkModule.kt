@@ -71,7 +71,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideChampionService(@DataDragonRetrofit retrofit: Retrofit): DataDragonService =
+    fun provideDataDragonService(@DataDragonRetrofit retrofit: Retrofit): DataDragonService =
         retrofit.create(DataDragonService::class.java)
 
     @Qualifier

@@ -43,7 +43,10 @@ internal fun DictionaryScreen(
                 }
 
                 DictionaryTabs.Item.ordinal -> {
-
+                    ItemScreen(
+                        showSnackBar = showSnackBar,
+                        navController = navController
+                    )
                 }
             }
         }

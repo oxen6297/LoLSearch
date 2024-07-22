@@ -15,4 +15,4 @@ internal fun skinImage(id: String, num: Int): String =
     "${BuildConfig.DATA_DRAGON_BASE_URL}cdn/img/champion/loading/${id}_${num}.jpg"
 
 internal fun itemImage(version: String, fileName: String): String =
-    "${BuildConfig.DATA_DRAGON_BASE_URL}cdn/${version}/img/profileicon/${fileName}"
+    "${BuildConfig.DATA_DRAGON_BASE_URL}cdn/${version}/img/item/${fileName}"

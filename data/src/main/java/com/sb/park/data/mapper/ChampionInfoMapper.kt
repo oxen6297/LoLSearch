@@ -62,6 +62,4 @@ private object ChampionInfoMapper : ModelMapper<ChampionInfoResponse, ChampionIn
         )
 }
 
-private fun String.deleteHtmlTag(): String = this.replace("<.*?>".toRegex(), "")
-
 internal fun ChampionInfoResponse.toModel(): ChampionInfoModel = ChampionInfoMapper.asModel(this)

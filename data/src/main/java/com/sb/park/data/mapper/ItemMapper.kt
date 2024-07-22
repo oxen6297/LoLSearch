@@ -8,8 +8,9 @@ import com.sb.park.model.ItemModel
 private object ItemMapper : ModelMapper<ItemResponse, ItemModel> {
 
     override fun asModel(response: ItemResponse): ItemModel = ItemModel(
-        name = response.name,
-        plaintext = response.plaintext,
+        name = response.name.deleteHtmlTag(),
+        version = response.version ?: "14.13.1",
+        plaintext = response.plaintext.deleteHtmlTag(),
         into = response.into,
         from = response.from,
         image = response.image.toModel(),

@@ -5,7 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ItemModel(
-    @PrimaryKey val name: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val name: String,
+    val version: String,
     val plaintext: String,
     val into: List<String>?,
     val from: List<String>?,

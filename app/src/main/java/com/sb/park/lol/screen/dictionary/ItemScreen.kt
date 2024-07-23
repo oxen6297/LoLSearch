@@ -23,6 +23,7 @@ import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
+import com.sb.park.lol.navigation.navigateToItemInfoScreen
 import com.sb.park.lol.utils.itemImage
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ItemModel
@@ -81,7 +82,7 @@ private fun ItemsItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable {  },
+        modifier = modifier.clickable { navController.navigateToItemInfoScreen(itemModel.name) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -93,7 +94,7 @@ private fun ItemsItem(
         )
         Text(
             text = itemModel.name,
-            style = LoLTheme.typography.contentMediumSB
+            style = LoLTheme.typography.contentSmall
         )
     }
 }

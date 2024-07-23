@@ -19,9 +19,10 @@ import androidx.navigation.navArgument
 import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
-import com.sb.park.lol.navigation.ScreenNav
+import com.sb.park.lol.navigation.NavScreen
 import com.sb.park.lol.screen.dictionary.detail.ChampionInfoScreen
 import com.sb.park.lol.screen.dictionary.DictionaryScreen
+import com.sb.park.lol.screen.dictionary.detail.ItemInfoScreen
 import com.sb.park.lol.screen.match.MatchScreen
 import com.sb.park.lol.screen.mypage.MyPageScreen
 import com.sb.park.lol.utils.KeyFile
@@ -70,7 +71,7 @@ class MainActivity : ComponentActivity() {
                             MyPageScreen()
                         }
                         composable(
-                            route = "${ScreenNav.Detail.route}/{${KeyFile.CHAMPION_ID}}",
+                            route = "${NavScreen.ChampionInfo.route}/{${KeyFile.CHAMPION_ID}}",
                             arguments = listOf(
                                 navArgument(KeyFile.CHAMPION_ID) {
                                     type = NavType.StringType
@@ -78,6 +79,16 @@ class MainActivity : ComponentActivity() {
                             )
                         ) {
                             ChampionInfoScreen(showErrorSnackBar)
+                        }
+                        composable(
+                            route = "${NavScreen.ItemInfo.route}/{${KeyFile.ITEM_ID}}",
+                            arguments = listOf(
+                                navArgument(KeyFile.ITEM_ID) {
+                                    type = NavType.StringType
+                                }
+                            )
+                        ) {
+                            ItemInfoScreen(showErrorSnackBar)
                         }
                     }
                 }

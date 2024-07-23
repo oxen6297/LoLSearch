@@ -2,6 +2,10 @@ package com.sb.park.lol.navigation
 
 import androidx.navigation.NavController
 
-fun NavController.navigateToDetailScreen(championId: String) {
-    this.navigate("${ScreenNav.Detail.route}/${championId}")
+fun NavController.navigateToChampionInfoScreen(championId: String) {
+    this.navigate("${NavScreen.ChampionInfo.route}/${championId}")
+}
+
+fun NavController.navigateToItemInfoScreen(itemId: String) {
+    this.navigate("${NavScreen.ItemInfo.route}/${itemId}")
 }

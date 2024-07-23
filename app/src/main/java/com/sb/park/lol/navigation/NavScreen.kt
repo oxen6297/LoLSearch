@@ -1,8 +1,9 @@
 package com.sb.park.lol.navigation
 
-enum class ScreenNav(val route: String) {
+enum class NavScreen(val route: String) {
     Dictionary("dictionary"),
-    Detail("detail"),
+    ChampionInfo("championInfo"),
+    ItemInfo("itemInfo"),
     Search("search"),
     MyPage("myPage")
 }

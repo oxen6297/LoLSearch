@@ -19,7 +19,7 @@ internal class ItemInfoViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val name: String = checkNotNull(savedStateHandle[KeyFile.ITEM_NAME])
+    private val name: String = checkNotNull(savedStateHandle[KeyFile.ITEM_ID])
 
     val uiStateFlow: StateFlow<UiState<ItemModel>> = itemInfoUseCase(name).stateIn(
         scope = viewModelScope,

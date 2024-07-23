@@ -23,7 +23,7 @@ import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
-import com.sb.park.lol.navigation.navigateToDetailScreen
+import com.sb.park.lol.navigation.navigateToChampionInfoScreen
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
@@ -83,7 +83,7 @@ private fun ChampionItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigateToDetailScreen(championModel.id) },
+        modifier = modifier.clickable { navController.navigateToChampionInfoScreen(championModel.id) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

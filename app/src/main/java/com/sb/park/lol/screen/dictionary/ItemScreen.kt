@@ -59,13 +59,13 @@ private fun ItemsContent(
 ) {
     LazyVerticalGrid(
         modifier = modifier.padding(start = 20.dp, end = 20.dp),
-        columns = GridCells.Fixed(5),
+        columns = GridCells.Fixed(4),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         items(
             items = itemList,
-            key = { itemModel -> itemModel.id }
+            key = { itemModel -> itemModel.name }
         ) { itemModel ->
             ItemsItem(
                 itemModel = itemModel,

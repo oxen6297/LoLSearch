@@ -18,7 +18,7 @@ import com.sb.park.designsystem.widget.ShimmerSpacer
 @Composable
 internal fun ItemShimmer(modifier: Modifier = Modifier) {
     LazyVerticalGrid(
-        columns = GridCells.Fixed(5),
+        columns = GridCells.Fixed(4),
         modifier = modifier
             .padding(20.dp)
             .fillMaxSize(),

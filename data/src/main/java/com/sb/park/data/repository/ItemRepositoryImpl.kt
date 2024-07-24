@@ -30,18 +30,20 @@ internal class ItemRepositoryImpl @Inject constructor(
         }
 
         val version = dataStoreRepository.getVersion.first()
-        dataDragonService.getItem(version).data.values.toList().distinctBy { itemResponse ->
+        dataDragonService.getItem(version).data.values.asSequence().distinctBy { itemResponse ->
             itemResponse.name
+        }.filter {
+            it.gold.purchasable
         }.map { itemResponse ->
             itemResponse.toModel()
         }.sortedBy { itemModel ->
             itemModel.name
-        }.also { itemList ->
+        }.toList().also { itemList ->
             itemDao.insertItem(itemList)
         }
     }.flowOn(coroutineDispatcher)
 
     override fun fetchItemInfo(name: String): Flow<UiState<ItemModel>> = safeFlow {
-       itemDao.getItem(name)
+        itemDao.getItem(name)
     }.flowOn(coroutineDispatcher)
 }

@@ -42,28 +42,33 @@ internal class ChampionRepositoryImpl @Inject constructor(
         }
     }.flowOn(coroutineDispatcher)
 
-    override fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>> = safeFlow {
-        championInfoDao.getChampion(championId)?.let { dbChampionInfo ->
-            return@safeFlow dbChampionInfo
-        }
-
-        val version = dataStoreRepository.getVersion.first()
-        dataDragonService.getChampionInfo(version, championId).data.values.first().toModel()
-            .also { champion ->
-                championInfoDao.insertChampion(champion)
+    override fun fetchChampionInfo(championId: String): Flow<UiState<ChampionInfoModel>> =
+        safeFlow {
+            championInfoDao.getChampion(championId)?.let { dbChampionInfo ->
+                return@safeFlow dbChampionInfo
             }
-    }.flowOn(coroutineDispatcher)
+
+            val version = dataStoreRepository.getVersion.first()
+            dataDragonService.getChampionInfo(version, championId).data.values.first().toModel()
+                .also { champion ->
+                    championInfoDao.insertChampion(champion)
+                }
+        }.flowOn(coroutineDispatcher)
 
     override suspend fun fetchVersion() {
         val myVersion = dataStoreRepository.getVersion.first()
+        val myDate = dataStoreRepository.getDate.first()
         val serverVersion = dataDragonService.getVersion().first()
+        val serverDate = System.currentTimeMillis()
 
-        if (myVersion == serverVersion) {
+        val oneWeekMills = 1000 * 60 * 60 * 7 * 24
+
+        if (serverDate - myDate < oneWeekMills || myVersion == serverVersion) {
             return
         }
 
         championDao.deleteChampionList()
         championInfoDao.deleteChampion()
-        dataStoreRepository.saveVersion(serverVersion)
+        dataStoreRepository.saveVersion(setOf(serverVersion, serverDate.toString()))
     }
 }

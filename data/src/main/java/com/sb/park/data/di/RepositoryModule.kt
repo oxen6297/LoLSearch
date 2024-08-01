@@ -16,11 +16,11 @@ import dagger.hilt.components.SingletonComponent
 internal abstract class RepositoryModule {
 
     @Binds
-    abstract fun provideDataStoreRepository(dataStoreRepositoryImpl: DataStoreRepositoryImpl): DataStoreRepository
+    abstract fun bindsDataStoreRepository(dataStoreRepositoryImpl: DataStoreRepositoryImpl): DataStoreRepository
 
     @Binds
-    abstract fun provideChampionRepository(championRepositoryImpl: ChampionRepositoryImpl): ChampionRepository
+    abstract fun bindsChampionRepository(championRepositoryImpl: ChampionRepositoryImpl): ChampionRepository
 
     @Binds
-    abstract fun provideItemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
+    abstract fun bindsItemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
 }

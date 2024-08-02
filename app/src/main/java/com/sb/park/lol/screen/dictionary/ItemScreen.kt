@@ -37,11 +37,13 @@ internal fun ItemScreen(
     viewModel: DictionaryViewModel = hiltViewModel()
 ) {
     val uiStateFlow by viewModel.itemUiStateFlow.collectAsStateWithLifecycle()
+    val version by viewModel.versionFlow.collectAsStateWithLifecycle()
 
     when (uiStateFlow) {
         is UiState.Loading -> ItemShimmer()
         is UiState.Success -> {
             ItemsContent(
+                version = version,
                 itemList = uiStateFlow.onSuccess().toImmutableList(),
                 navController = navController
             )
@@ -53,6 +55,7 @@ internal fun ItemScreen(
 
 @Composable
 private fun ItemsContent(
+    version: String,
     itemList: ImmutableList<ItemModel>,
     navController: NavController,
     modifier: Modifier = Modifier
@@ -68,6 +71,7 @@ private fun ItemsContent(
             key = { itemModel -> itemModel.name }
         ) { itemModel ->
             ItemsItem(
+                version = version,
                 itemModel = itemModel,
                 navController = navController,
             )
@@ -77,6 +81,7 @@ private fun ItemsContent(
 
 @Composable
 private fun ItemsItem(
+    version: String,
     itemModel: ItemModel,
     navController: NavController,
     modifier: Modifier = Modifier
@@ -87,7 +92,7 @@ private fun ItemsItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            model = itemImage(itemModel.version, itemModel.image.fileName),
+            model = itemImage(version, itemModel.image.fileName),
             contentDescription = itemModel.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)

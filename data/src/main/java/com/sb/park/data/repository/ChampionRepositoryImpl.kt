@@ -61,7 +61,7 @@ internal class ChampionRepositoryImpl @Inject constructor(
         val serverVersion = dataDragonService.getVersion().first()
         val serverDate = System.currentTimeMillis()
 
-        val oneWeekMills = 1000 * 60 * 60 * 7 * 24
+        val oneWeekMills = 1000 * 60 * 60 * 24 * 7
 
         if (serverDate - myDate < oneWeekMills || myVersion == serverVersion) {
             return

@@ -6,7 +6,6 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ItemResponse(
     @field:Json(name = "name") val name: String,
-    @field:Json(name = "version") val version: String?,
     @field:Json(name = "plaintext") val plaintext: String,
     @field:Json(name = "into") val into: List<String>?,
     @field:Json(name = "from") val from: List<String>?,

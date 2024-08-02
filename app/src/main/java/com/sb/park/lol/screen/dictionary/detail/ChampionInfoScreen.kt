@@ -55,16 +55,25 @@ internal fun ChampionInfoScreen(
     viewModel: ChampionInfoViewModel = hiltViewModel()
 ) {
     val uiStateFlow by viewModel.uiStateFlow.collectAsStateWithLifecycle()
+    val version by viewModel.versionFlow.collectAsStateWithLifecycle()
 
     when (uiStateFlow) {
         is UiState.Loading -> ChampionInfoShimmer()
-        is UiState.Success -> ChampionInfoContent(uiStateFlow.onSuccess())
+        is UiState.Success -> ChampionInfoContent(
+            version = version,
+            championInfoModel = uiStateFlow.onSuccess()
+        )
+
         is UiState.Error -> showSnackBar(uiStateFlow.onError())
     }
 }
 
 @Composable
-private fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: Modifier = Modifier) {
+private fun ChampionInfoContent(
+    version: String,
+    championInfoModel: ChampionInfoModel,
+    modifier: Modifier = Modifier
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -86,7 +95,7 @@ private fun ChampionInfoContent(championInfoModel: ChampionInfoModel, modifier: 
         StatsColumn(stat = championInfoModel.stats)
         TipColumn(tips = championInfoModel.tips.toImmutableList())
         SpellsColumn(
-            version = championInfoModel.version,
+            version = version,
             spells = championInfoModel.spells.toImmutableList(),
             passive = championInfoModel.passive
         )

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.sb.park.designsystem.UiState
 import com.sb.park.domain.usecase.ChampionUseCase
 import com.sb.park.domain.usecase.ItemUseCase
+import com.sb.park.domain.usecase.VersionUseCase
 import com.sb.park.model.ChampionModel
 import com.sb.park.model.ItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 internal class DictionaryViewModel @Inject constructor(
     championUseCase: ChampionUseCase,
-    itemUseCase: ItemUseCase
+    itemUseCase: ItemUseCase,
+    versionUseCase: VersionUseCase,
 ) : ViewModel() {
 
     val championUiStateFlow: StateFlow<UiState<List<ChampionModel>>> = championUseCase().stateIn(
@@ -29,5 +31,11 @@ internal class DictionaryViewModel @Inject constructor(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
         initialValue = UiState.Loading
+    )
+
+    val versionFlow: StateFlow<String> = versionUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000L),
+        initialValue = "14.13.1"
     )
 }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -61,7 +62,7 @@ private fun ItemsContent(
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
-        modifier = modifier.padding(start = 20.dp, end = 20.dp),
+        modifier = modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
         columns = GridCells.Fixed(4),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
@@ -92,6 +93,7 @@ private fun ItemsItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
+            modifier = modifier.size(65.dp),
             model = itemImage(version, itemModel.image.fileName),
             contentDescription = itemModel.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),

@@ -22,8 +22,8 @@ private object ItemMapper : ModelMapper<ItemResponse, ItemModel> {
     private fun ItemResponse.GoldResponse.toModel(): ItemModel.GoldModel =
         ItemModel.GoldModel(
             purchasable = this.purchasable,
-            total = this.total,
-            sell = this.sell
+            total = "${this.total} 원",
+            sell = "${this.sell} 원"
         )
 }
 

@@ -18,7 +18,7 @@ data class ItemModel(
 
     data class GoldModel(
         val purchasable: Boolean,
-        val total: Int,
-        val sell: Int
+        val total: String,
+        val sell: String
     )
 }

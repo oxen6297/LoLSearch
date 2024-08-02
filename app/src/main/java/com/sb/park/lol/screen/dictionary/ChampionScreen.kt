@@ -59,7 +59,7 @@ private fun ChampionContent(
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
-        modifier = modifier.padding(start = 20.dp, end = 20.dp),
+        modifier = modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
         columns = GridCells.Fixed(3),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalArrangement = Arrangement.spacedBy(30.dp)

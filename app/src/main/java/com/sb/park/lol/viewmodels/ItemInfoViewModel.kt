@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sb.park.designsystem.UiState
 import com.sb.park.domain.usecase.ItemInfoUseCase
+import com.sb.park.domain.usecase.VersionUseCase
 import com.sb.park.lol.utils.KeyFile
 import com.sb.park.model.ItemModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class ItemInfoViewModel @Inject constructor(
     itemInfoUseCase: ItemInfoUseCase,
+    versionUseCase: VersionUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -25,5 +27,11 @@ internal class ItemInfoViewModel @Inject constructor(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
         initialValue = UiState.Loading
+    )
+
+    val versionFlow: StateFlow<String> = versionUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000L),
+        initialValue = "14.13.1"
     )
 }

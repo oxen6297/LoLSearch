@@ -14,7 +14,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun TopBar(title: String, style: TextStyle, modifier: Modifier = Modifier) {
+fun TopBar(
+    title: String,
+    style: TextStyle,
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .fillMaxWidth()

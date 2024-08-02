@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CustomGaugeBar(
     progress: Float,
+    progressColor: Color,
     modifier: Modifier = Modifier,
-    progressColor: Color
 ) {
     Box(
         modifier = modifier

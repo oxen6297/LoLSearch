@@ -7,6 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
 @Composable
-fun MarginSpacer(marginValue: Dp, modifier: Modifier = Modifier) {
+fun MarginSpacer(
+    marginValue: Dp,
+    modifier: Modifier = Modifier
+) {
     Spacer(modifier = modifier.size(marginValue))
 }

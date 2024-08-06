@@ -32,8 +32,8 @@ internal class ItemRepositoryImpl @Inject constructor(
         val version = dataStoreRepository.getVersion.first()
         dataDragonService.getItem(version).data.values.asSequence().distinctBy { itemResponse ->
             itemResponse.name
-        }.filter {
-            it.gold.purchasable
+        }.filter { itemResponse ->
+            itemResponse.gold.purchasable
         }.map { itemResponse ->
             itemResponse.toModel()
         }.sortedBy { itemModel ->

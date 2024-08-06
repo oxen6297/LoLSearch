@@ -10,6 +10,7 @@ data class ItemResponse(
     @field:Json(name = "into") val into: List<String>?,
     @field:Json(name = "from") val from: List<String>?,
     @field:Json(name = "image") val image: ImageResponse,
+
     @field:Json(name = "image") val gold: GoldResponse,
     @field:Json(name = "tags") val tags: List<String>,
 ) {

@@ -11,6 +11,7 @@ data class ItemModel(
     val plaintext: String,
     val into: List<String>?,
     val from: List<String>?,
+
     val image: ImageModel,
     val gold: GoldModel,
     val tags: List<String>,

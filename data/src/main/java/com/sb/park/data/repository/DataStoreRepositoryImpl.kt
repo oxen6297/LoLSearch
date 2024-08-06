@@ -18,13 +18,15 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
         }
     }
 
-    override val getVersion: Flow<String> = dataStore.data.map {
-        val data = it[VERSION] ?: setOf(DEFAULT_VERSION, System.currentTimeMillis().toString())
+    override val getVersion: Flow<String> = dataStore.data.map { preferences ->
+        val data =
+            preferences[VERSION] ?: setOf(DEFAULT_VERSION, System.currentTimeMillis().toString())
         data.toList()[0]
     }
 
-    override val getDate: Flow<Long> = dataStore.data.map {
-        val data = it[VERSION] ?: setOf(DEFAULT_VERSION, System.currentTimeMillis().toString())
+    override val getDate: Flow<Long> = dataStore.data.map { preferences ->
+        val data =
+            preferences[VERSION] ?: setOf(DEFAULT_VERSION, System.currentTimeMillis().toString())
         data.toList()[1].toLong()
     }
 
@@ -34,8 +36,8 @@ internal class DataStoreRepositoryImpl @Inject constructor(private val dataStore
         }
     }
 
-    override val getIsDarkTheme: Flow<Boolean> = dataStore.data.map {
-        it[IS_DARK_THEME] ?: false
+    override val getIsDarkTheme: Flow<Boolean> = dataStore.data.map { preferences ->
+        preferences[IS_DARK_THEME] ?: false
     }
 
     companion object {

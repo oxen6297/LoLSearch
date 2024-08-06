@@ -10,11 +10,13 @@ data class ChampionInfoModel(
     val title: String,
     val lore: String,
     val type: String,
+
     val image: ImageModel,
     val tags: List<String>,
     val tips: List<String>,
     val stats: StatModel,
     val skins: List<SkinModel>,
+
     val spells: List<SpellModel>,
     val passive: PassiveModel,
 ) {

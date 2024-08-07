@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.dictionary
+package com.sb.park.lol.screen.shimmer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

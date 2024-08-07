@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.dictionary.detail
+package com.sb.park.lol.screen.shimmer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,7 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.designsystem.widget.ShimmerSpacer
 
 @Composable
-internal fun ItemInfoShimmer(modifier: Modifier = Modifier) {
+internal fun ChampionInfoShimmer(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -31,7 +31,7 @@ internal fun ItemInfoShimmer(modifier: Modifier = Modifier) {
         ImageShimmer()
         TitleShimmer()
         DescriptionShimmer()
-        FromItemShimmer()
+        SkillShimmer()
     }
 }
 
@@ -40,7 +40,7 @@ private fun ImageShimmer(modifier: Modifier = Modifier) {
     ShimmerSpacer(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(2.0f),
+            .aspectRatio(1.6f),
         shape = RectangleShape
     )
 }
@@ -59,13 +59,16 @@ private fun TitleShimmer(modifier: Modifier = Modifier) {
                 .width(80.dp)
                 .height(30.dp)
         )
-        repeat(3) {
-            ShimmerSpacer(
-                modifier = modifier
-                    .width(70.dp)
-                    .height(25.dp)
-            )
-        }
+        ShimmerSpacer(
+            modifier = modifier
+                .width(70.dp)
+                .height(25.dp)
+        )
+        ShimmerSpacer(
+            modifier = modifier
+                .width(70.dp)
+                .height(25.dp)
+        )
     }
 }
 
@@ -81,19 +84,21 @@ private fun DescriptionShimmer(modifier: Modifier = Modifier) {
     ) {
         ShimmerSpacer(
             modifier = modifier
-                .fillMaxWidth()
-                .height(20.dp)
+                .width(180.dp)
+                .height(30.dp)
         )
-        ShimmerSpacer(
-            modifier = modifier
-                .fillMaxWidth()
-                .height(20.dp)
-        )
+        repeat(3) {
+            ShimmerSpacer(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .height(20.dp)
+            )
+        }
     }
 }
 
 @Composable
-private fun FromItemShimmer(modifier: Modifier = Modifier) {
+private fun SkillShimmer(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.padding(20.dp),
         contentAlignment = Alignment.TopCenter
@@ -107,8 +112,8 @@ private fun FromItemShimmer(modifier: Modifier = Modifier) {
 
 @Preview(showSystemUi = true)
 @Composable
-private fun ItemInfoShimmerPreview() {
+private fun DetailShimmerPreview() {
     LoLSearchTheme {
-        ItemInfoShimmer()
+        ChampionInfoShimmer()
     }
 }

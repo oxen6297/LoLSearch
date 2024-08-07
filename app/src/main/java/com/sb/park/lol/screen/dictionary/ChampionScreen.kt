@@ -24,6 +24,7 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToChampionInfoScreen
+import com.sb.park.lol.screen.shimmer.ChampionShimmer
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel

@@ -25,6 +25,7 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToItemInfoScreen
+import com.sb.park.lol.screen.shimmer.ItemShimmer
 import com.sb.park.lol.utils.itemImage
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ItemModel

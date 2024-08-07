@@ -40,6 +40,7 @@ import com.sb.park.designsystem.widget.CustomGaugeBar
 import com.sb.park.designsystem.widget.MarginSpacer
 import com.sb.park.designsystem.widget.TextChip
 import com.sb.park.lol.R
+import com.sb.park.lol.screen.shimmer.ChampionInfoShimmer
 import com.sb.park.lol.utils.championImage
 import com.sb.park.lol.utils.passiveImage
 import com.sb.park.lol.utils.skinImage

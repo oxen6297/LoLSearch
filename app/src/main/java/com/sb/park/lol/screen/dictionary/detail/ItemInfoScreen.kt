@@ -33,6 +33,7 @@ import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.designsystem.widget.TextChip
 import com.sb.park.lol.R
+import com.sb.park.lol.screen.shimmer.ItemInfoShimmer
 import com.sb.park.lol.utils.itemImage
 import com.sb.park.lol.viewmodels.ItemInfoViewModel
 import com.sb.park.model.ItemModel

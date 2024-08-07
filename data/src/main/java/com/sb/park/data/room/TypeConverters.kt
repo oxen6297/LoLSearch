@@ -146,16 +146,18 @@ class GoldTypeConverter @Inject constructor(private val moshi: Moshi) {
 class RuneSlotTypeConverter @Inject constructor(private val moshi: Moshi) {
 
     @TypeConverter
-    fun fromString(value: String): RuneModel.RuneSlot? {
-        val adapter: JsonAdapter<RuneModel.RuneSlot> =
-            moshi.adapter(RuneModel.RuneSlot::class.java)
+    fun fromString(value: String): List<RuneModel.RuneSlot>? {
+        val listType =
+            Types.newParameterizedType(List::class.java, RuneModel.RuneSlot::class.java)
+        val adapter: JsonAdapter<List<RuneModel.RuneSlot>> = moshi.adapter(listType)
         return adapter.fromJson(value)
     }
 
     @TypeConverter
-    fun fromRuneSlot(type: RuneModel.RuneSlot): String {
-        val adapter: JsonAdapter<RuneModel.RuneSlot> =
-            moshi.adapter(RuneModel.RuneSlot::class.java)
+    fun fromRuneSlot(type: List<RuneModel.RuneSlot>): String {
+        val listType =
+            Types.newParameterizedType(List::class.java, RuneModel.RuneSlot::class.java)
+        val adapter: JsonAdapter<List<RuneModel.RuneSlot>> = moshi.adapter(listType)
         return adapter.toJson(type)
     }
 }
@@ -164,16 +166,18 @@ class RuneSlotTypeConverter @Inject constructor(private val moshi: Moshi) {
 class RuneTypeConverter @Inject constructor(private val moshi: Moshi) {
 
     @TypeConverter
-    fun fromString(value: String): RuneModel.Rune? {
-        val adapter: JsonAdapter<RuneModel.Rune> =
-            moshi.adapter(RuneModel.Rune::class.java)
+    fun fromString(value: String): List<RuneModel.Rune>? {
+        val listType =
+            Types.newParameterizedType(List::class.java, RuneModel.Rune::class.java)
+        val adapter: JsonAdapter<List<RuneModel.Rune>> = moshi.adapter(listType)
         return adapter.fromJson(value)
     }
 
     @TypeConverter
-    fun fromRune(type: RuneModel.Rune): String {
-        val adapter: JsonAdapter<RuneModel.Rune> =
-            moshi.adapter(RuneModel.Rune::class.java)
+    fun fromRune(type: List<RuneModel.Rune>): String {
+        val listType =
+            Types.newParameterizedType(List::class.java, RuneModel.Rune::class.java)
+        val adapter: JsonAdapter<List<RuneModel.Rune>> = moshi.adapter(listType)
         return adapter.toJson(type)
     }
 }

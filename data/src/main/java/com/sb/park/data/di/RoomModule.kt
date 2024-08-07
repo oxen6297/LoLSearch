@@ -9,6 +9,9 @@ import com.sb.park.data.room.ImageTypeConverter
 import com.sb.park.data.room.ItemDao
 import com.sb.park.data.room.LOLDataBase
 import com.sb.park.data.room.PassiveTypeConverter
+import com.sb.park.data.room.RuneDao
+import com.sb.park.data.room.RuneSlotTypeConverter
+import com.sb.park.data.room.RuneTypeConverter
 import com.sb.park.data.room.SkinTypeConverter
 import com.sb.park.data.room.SpellTypeConverter
 import com.sb.park.data.room.StatsTypeConverter
@@ -34,7 +37,9 @@ object RoomModule {
         skinTypeConverter: SkinTypeConverter,
         spellTypeConverter: SpellTypeConverter,
         passiveTypeConverter: PassiveTypeConverter,
-        goldTypeConverter: GoldTypeConverter
+        goldTypeConverter: GoldTypeConverter,
+        runeSlotTypeConverter: RuneSlotTypeConverter,
+        runeTypeConverter: RuneTypeConverter
     ): LOLDataBase = Room
         .databaseBuilder(context, LOLDataBase::class.java, "LOL.db")
         .addTypeConverter(imageTypeConverter)
@@ -44,6 +49,8 @@ object RoomModule {
         .addTypeConverter(spellTypeConverter)
         .addTypeConverter(passiveTypeConverter)
         .addTypeConverter(goldTypeConverter)
+        .addTypeConverter(runeSlotTypeConverter)
+        .addTypeConverter(runeTypeConverter)
         .fallbackToDestructiveMigration()
         .build()
 
@@ -59,4 +66,8 @@ object RoomModule {
     @Provides
     @Singleton
     fun provideItemDao(lolDataBase: LOLDataBase): ItemDao = lolDataBase.ItemDao()
+
+    @Provides
+    @Singleton
+    fun provideRuneDao(lolDataBase: LOLDataBase): RuneDao = lolDataBase.RuneDao()
 }

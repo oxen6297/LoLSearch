@@ -6,9 +6,10 @@ import androidx.room.TypeConverters
 import com.sb.park.model.ChampionInfoModel
 import com.sb.park.model.ChampionModel
 import com.sb.park.model.ItemModel
+import com.sb.park.model.RuneModel
 
 @Database(
-    entities = [ChampionModel::class, ChampionInfoModel::class, ItemModel::class],
+    entities = [ChampionModel::class, ChampionInfoModel::class, ItemModel::class, RuneModel::class],
     version = 1,
     exportSchema = false
 )
@@ -20,11 +21,14 @@ import com.sb.park.model.ItemModel
         SkinTypeConverter::class,
         SpellTypeConverter::class,
         PassiveTypeConverter::class,
-        GoldTypeConverter::class
+        GoldTypeConverter::class,
+        RuneSlotTypeConverter::class,
+        RuneTypeConverter::class
     ]
 )
 abstract class LOLDataBase : RoomDatabase() {
     abstract fun championDao(): ChampionDao
     abstract fun championInfoDao(): ChampionInfoDao
     abstract fun ItemDao(): ItemDao
+    abstract fun RuneDao(): RuneDao
 }

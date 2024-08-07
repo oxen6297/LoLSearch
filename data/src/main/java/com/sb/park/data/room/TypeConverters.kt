@@ -5,6 +5,7 @@ import androidx.room.TypeConverter
 import com.sb.park.model.ChampionInfoModel
 import com.sb.park.model.ImageModel
 import com.sb.park.model.ItemModel
+import com.sb.park.model.RuneModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -137,6 +138,42 @@ class GoldTypeConverter @Inject constructor(private val moshi: Moshi) {
     fun fromGold(type: ItemModel.GoldModel): String {
         val adapter: JsonAdapter<ItemModel.GoldModel> =
             moshi.adapter(ItemModel.GoldModel::class.java)
+        return adapter.toJson(type)
+    }
+}
+
+@ProvidedTypeConverter
+class RuneSlotTypeConverter @Inject constructor(private val moshi: Moshi) {
+
+    @TypeConverter
+    fun fromString(value: String): RuneModel.RuneSlot? {
+        val adapter: JsonAdapter<RuneModel.RuneSlot> =
+            moshi.adapter(RuneModel.RuneSlot::class.java)
+        return adapter.fromJson(value)
+    }
+
+    @TypeConverter
+    fun fromRuneSlot(type: RuneModel.RuneSlot): String {
+        val adapter: JsonAdapter<RuneModel.RuneSlot> =
+            moshi.adapter(RuneModel.RuneSlot::class.java)
+        return adapter.toJson(type)
+    }
+}
+
+@ProvidedTypeConverter
+class RuneTypeConverter @Inject constructor(private val moshi: Moshi) {
+
+    @TypeConverter
+    fun fromString(value: String): RuneModel.Rune? {
+        val adapter: JsonAdapter<RuneModel.Rune> =
+            moshi.adapter(RuneModel.Rune::class.java)
+        return adapter.fromJson(value)
+    }
+
+    @TypeConverter
+    fun fromRune(type: RuneModel.Rune): String {
+        val adapter: JsonAdapter<RuneModel.Rune> =
+            moshi.adapter(RuneModel.Rune::class.java)
         return adapter.toJson(type)
     }
 }

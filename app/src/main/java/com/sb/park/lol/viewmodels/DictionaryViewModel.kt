@@ -5,9 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.sb.park.designsystem.UiState
 import com.sb.park.domain.usecase.ChampionUseCase
 import com.sb.park.domain.usecase.ItemUseCase
+import com.sb.park.domain.usecase.RuneUseCase
 import com.sb.park.domain.usecase.VersionUseCase
 import com.sb.park.model.ChampionModel
 import com.sb.park.model.ItemModel
+import com.sb.park.model.RuneModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +21,7 @@ internal class DictionaryViewModel @Inject constructor(
     championUseCase: ChampionUseCase,
     itemUseCase: ItemUseCase,
     versionUseCase: VersionUseCase,
+    runeUseCase: RuneUseCase
 ) : ViewModel() {
 
     val championUiStateFlow: StateFlow<UiState<List<ChampionModel>>> = championUseCase().stateIn(
@@ -28,6 +31,12 @@ internal class DictionaryViewModel @Inject constructor(
     )
 
     val itemUiStateFlow: StateFlow<UiState<List<ItemModel>>> = itemUseCase().stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5_000L),
+        initialValue = UiState.Loading
+    )
+
+    val runeUiStateFlow: StateFlow<UiState<RuneModel>> = runeUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000L),
         initialValue = UiState.Loading

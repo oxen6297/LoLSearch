@@ -1,6 +1,5 @@
 package com.sb.park.lol.screen.dictionary
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -26,6 +25,7 @@ import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToItemInfoScreen
 import com.sb.park.lol.screen.shimmer.ItemShimmer
+import com.sb.park.lol.utils.clickableSingle
 import com.sb.park.lol.utils.itemImage
 import com.sb.park.lol.viewmodels.DictionaryViewModel
 import com.sb.park.model.ItemModel
@@ -89,7 +89,7 @@ private fun ItemsItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigateToItemInfoScreen(itemModel.name) },
+        modifier = modifier.clickableSingle { navController.navigateToItemInfoScreen(itemModel.name) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

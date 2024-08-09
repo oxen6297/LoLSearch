@@ -1,6 +1,5 @@
 package com.sb.park.lol.screen.dictionary
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,6 +24,7 @@ import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
 import com.sb.park.lol.navigation.navigateToChampionInfoScreen
 import com.sb.park.lol.screen.shimmer.ChampionShimmer
+import com.sb.park.lol.utils.clickableSingle
 import com.sb.park.lol.utils.skinImage
 import com.sb.park.lol.utils.toImmutableList
 import com.sb.park.lol.viewmodels.DictionaryViewModel
@@ -84,7 +84,7 @@ private fun ChampionItem(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickable { navController.navigateToChampionInfoScreen(championModel.id) },
+        modifier = modifier.clickableSingle { navController.navigateToChampionInfoScreen(championModel.id) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

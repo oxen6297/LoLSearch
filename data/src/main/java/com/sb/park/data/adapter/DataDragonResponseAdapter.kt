@@ -33,10 +33,12 @@ class DataDragonResponseAdapter<T>(private val delegate: JsonAdapter<Map<String,
     @ToJson
     override fun toJson(writer: JsonWriter, value: DataDragonResponse<T>?) {
         if (value != null) {
-            writer.beginObject()
-            writer.name("data")
-            delegate.toJson(writer, value.data)
-            writer.endObject()
+            writer.apply {
+                beginObject()
+                name("data")
+                delegate.toJson(this, value.data)
+                endObject()
+            }
         }
     }
 }

@@ -11,19 +11,19 @@ sealed class BottomNavItem(
 ) {
     data object Champion : BottomNavItem(
         NavScreen.Champion.route,
-        R.drawable.dictionary,
+        R.drawable.rune,
         R.string.champion
     )
 
     data object Item : BottomNavItem(
         NavScreen.Item.route,
-        R.drawable.search,
+        R.drawable.item,
         R.string.item
     )
 
     data object Rune : BottomNavItem(
         NavScreen.Rune.route,
-        R.drawable.my_page,
+        R.drawable.champion,
         R.string.rune
     )
 }

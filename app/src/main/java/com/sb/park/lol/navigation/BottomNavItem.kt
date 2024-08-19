@@ -9,21 +9,21 @@ sealed class BottomNavItem(
     @DrawableRes val icon: Int,
     @StringRes val title: Int
 ) {
-    data object Dictionary : BottomNavItem(
-        NavScreen.Dictionary.route,
+    data object Champion : BottomNavItem(
+        NavScreen.Champion.route,
         R.drawable.dictionary,
-        R.string.bottom_dictionary
+        R.string.champion
     )
 
-    data object Search : BottomNavItem(
-        NavScreen.Search.route,
+    data object Item : BottomNavItem(
+        NavScreen.Item.route,
         R.drawable.search,
-        R.string.bottom_search
+        R.string.item
     )
 
-    data object Setting : BottomNavItem(
-        NavScreen.MyPage.route,
+    data object Rune : BottomNavItem(
+        NavScreen.Rune.route,
         R.drawable.my_page,
-        R.string.bottom_my_page
+        R.string.rune
     )
 }

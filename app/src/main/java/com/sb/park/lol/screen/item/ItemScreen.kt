@@ -1,8 +1,9 @@
-package com.sb.park.lol.screen.dictionary
+package com.sb.park.lol.screen.item
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -22,55 +23,58 @@ import com.sb.park.designsystem.onError
 import com.sb.park.designsystem.onSuccess
 import com.sb.park.designsystem.theme.LoLTheme
 import com.sb.park.lol.R
-import com.sb.park.lol.navigation.navigateToChampionInfoScreen
-import com.sb.park.lol.screen.shimmer.ChampionShimmer
+import com.sb.park.lol.navigation.navigateToItemInfoScreen
+import com.sb.park.lol.screen.shimmer.ItemShimmer
 import com.sb.park.lol.utils.clickableSingle
-import com.sb.park.lol.utils.skinImage
-import com.sb.park.lol.utils.toImmutableList
+import com.sb.park.lol.utils.itemImage
 import com.sb.park.lol.viewmodels.DictionaryViewModel
-import com.sb.park.model.ChampionModel
+import com.sb.park.model.ItemModel
 import kotlinx.collections.immutable.ImmutableList
-
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-internal fun ChampionScreen(
-    showSnackBar: (Throwable?) -> Unit,
+internal fun ItemScreen(
+    showErrorSnackBar: (Throwable?) -> Unit,
     navController: NavController,
     viewModel: DictionaryViewModel = hiltViewModel()
 ) {
-    val uiStateFlow by viewModel.championUiStateFlow.collectAsStateWithLifecycle()
+    val uiStateFlow by viewModel.itemUiStateFlow.collectAsStateWithLifecycle()
+    val version by viewModel.versionFlow.collectAsStateWithLifecycle()
 
     when (uiStateFlow) {
-        is UiState.Loading -> ChampionShimmer()
+        is UiState.Loading -> ItemShimmer()
         is UiState.Success -> {
-            ChampionContent(
-                championList = uiStateFlow.onSuccess().toImmutableList(),
+            ItemsContent(
+                version = version,
+                itemList = uiStateFlow.onSuccess().toImmutableList(),
                 navController = navController
             )
         }
 
-        is UiState.Error -> showSnackBar(uiStateFlow.onError())
+        is UiState.Error -> showErrorSnackBar(uiStateFlow.onError())
     }
 }
 
 @Composable
-private fun ChampionContent(
-    championList: ImmutableList<ChampionModel>,
+private fun ItemsContent(
+    version: String,
+    itemList: ImmutableList<ItemModel>,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     LazyVerticalGrid(
         modifier = modifier.padding(top = 20.dp, start = 20.dp, end = 20.dp),
-        columns = GridCells.Fixed(3),
+        columns = GridCells.Fixed(4),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalArrangement = Arrangement.spacedBy(30.dp)
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         items(
-            items = championList,
-            key = { championModel -> championModel.id }
-        ) { championModel ->
-            ChampionItem(
-                championModel = championModel,
+            items = itemList,
+            key = { itemModel -> itemModel.name }
+        ) { itemModel ->
+            ItemsItem(
+                version = version,
+                itemModel = itemModel,
                 navController = navController,
             )
         }
@@ -78,25 +82,27 @@ private fun ChampionContent(
 }
 
 @Composable
-private fun ChampionItem(
-    championModel: ChampionModel,
+private fun ItemsItem(
+    version: String,
+    itemModel: ItemModel,
     navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.clickableSingle { navController.navigateToChampionInfoScreen(championModel.id) },
+        modifier = modifier.clickableSingle { navController.navigateToItemInfoScreen(itemModel.name) },
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         AsyncImage(
-            model = skinImage(championModel.id, 0),
-            contentDescription = championModel.name,
+            modifier = modifier.size(65.dp),
+            model = itemImage(version, itemModel.image.fileName),
+            contentDescription = itemModel.name,
             placeholder = painterResource(id = R.drawable.ic_launcher_foreground),
             error = painterResource(id = R.drawable.ic_launcher_foreground)
         )
         Text(
-            text = championModel.name,
-            style = LoLTheme.typography.contentMediumSB
+            text = itemModel.name,
+            style = LoLTheme.typography.contentSmall
         )
     }
 }

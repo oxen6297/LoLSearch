@@ -13,12 +13,14 @@ private object RuneMapper : ModelMapper<RuneResponse, RuneModel> {
         slots = response.slots.toModel()
     )
 
+    @JvmName("RuneSlotToModel")
     private fun List<RuneResponse.RuneSlot>.toModel(): List<RuneModel.RuneSlot> = map { slot ->
         RuneModel.RuneSlot(
             runes = slot.runes.toModel()
         )
     }
 
+    @JvmName("RuneToModel")
     private fun List<RuneResponse.Rune>.toModel(): List<RuneModel.Rune> = map { rune ->
         RuneModel.Rune(
             id = rune.id,

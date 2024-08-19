@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.dictionary.detail
+package com.sb.park.lol.screen.item
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,7 +42,7 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 internal fun ItemInfoScreen(
-    showSnackBar: (Throwable?) -> Unit,
+    showErrorSnackBar: (Throwable?) -> Unit,
     viewModel: ItemInfoViewModel = hiltViewModel()
 ) {
     val uiStateFlow by viewModel.uiStateFlow.collectAsStateWithLifecycle()
@@ -55,7 +55,7 @@ internal fun ItemInfoScreen(
             itemModel = uiStateFlow.onSuccess()
         )
 
-        is UiState.Error -> showSnackBar(uiStateFlow.onError())
+        is UiState.Error -> showErrorSnackBar(uiStateFlow.onError())
     }
 }
 

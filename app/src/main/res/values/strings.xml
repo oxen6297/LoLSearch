@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">LoLSearch</string>
-    <string name="bottom_dictionary">백과사전</string>
-    <string name="bottom_search">전적검색</string>
-    <string name="bottom_my_page">마이페이지</string>
-    <string name="champion_list">챔피언</string>
+    <string name="champion">챔피언</string>
+    <string name="item">아이템</string>
+    <string name="rune">룬</string>
     <string name="passive">Passive</string>
     <string name="champion_tip">챔피언 팁</string>
     <string name="empty_tip">등록된 정보가 없습니다.</string>

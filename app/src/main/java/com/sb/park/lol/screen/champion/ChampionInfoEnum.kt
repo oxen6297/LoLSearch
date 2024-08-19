@@ -1,4 +1,4 @@
-package com.sb.park.lol.screen.dictionary.detail
+package com.sb.park.lol.screen.champion
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

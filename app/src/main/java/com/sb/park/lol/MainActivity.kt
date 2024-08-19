@@ -20,11 +20,11 @@ import com.sb.park.designsystem.theme.LoLSearchTheme
 import com.sb.park.lol.navigation.BottomNavItem
 import com.sb.park.lol.navigation.BottomNavigation
 import com.sb.park.lol.navigation.NavScreen
-import com.sb.park.lol.screen.dictionary.detail.ChampionInfoScreen
-import com.sb.park.lol.screen.dictionary.DictionaryScreen
-import com.sb.park.lol.screen.dictionary.detail.ItemInfoScreen
-import com.sb.park.lol.screen.match.MatchScreen
-import com.sb.park.lol.screen.mypage.MyPageScreen
+import com.sb.park.lol.screen.champion.ChampionInfoScreen
+import com.sb.park.lol.screen.champion.ChampionScreen
+import com.sb.park.lol.screen.item.ItemInfoScreen
+import com.sb.park.lol.screen.item.ItemScreen
+import com.sb.park.lol.screen.rune.RuneScreen
 import com.sb.park.lol.utils.KeyFile
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -58,17 +58,26 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = BottomNavItem.Dictionary.route,
+                        startDestination = BottomNavItem.Champion.route,
                         modifier = Modifier.padding(innerPadding)
                     ) {
-                        composable(route = BottomNavItem.Dictionary.route) {
-                            DictionaryScreen(showErrorSnackBar, navController)
+                        composable(route = BottomNavItem.Champion.route) {
+                            ChampionScreen(
+                                showErrorSnackBar = showErrorSnackBar,
+                                navController = navController
+                            )
                         }
-                        composable(route = BottomNavItem.Search.route) {
-                            MatchScreen()
+                        composable(route = BottomNavItem.Item.route) {
+                            ItemScreen(
+                                showErrorSnackBar = showErrorSnackBar,
+                                navController = navController
+                            )
                         }
-                        composable(route = BottomNavItem.Setting.route) {
-                            MyPageScreen()
+                        composable(route = BottomNavItem.Rune.route) {
+                            RuneScreen(
+                                showErrorSnackBar = showErrorSnackBar,
+                                navController = navController
+                            )
                         }
                         composable(
                             route = "${NavScreen.ChampionInfo.route}/{${KeyFile.CHAMPION_ID}}",
@@ -78,7 +87,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            ChampionInfoScreen(showErrorSnackBar)
+                            ChampionInfoScreen(showErrorSnackBar = showErrorSnackBar)
                         }
                         composable(
                             route = "${NavScreen.ItemInfo.route}/{${KeyFile.ITEM_ID}}",
@@ -88,7 +97,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         ) {
-                            ItemInfoScreen(showErrorSnackBar)
+                            ItemInfoScreen(showErrorSnackBar = showErrorSnackBar)
                         }
                     }
                 }

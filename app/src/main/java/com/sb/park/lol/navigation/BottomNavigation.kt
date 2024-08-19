@@ -21,9 +21,9 @@ fun BottomNavigation(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val items = listOf(
-        BottomNavItem.Dictionary,
-        BottomNavItem.Search,
-        BottomNavItem.Setting,
+        BottomNavItem.Champion,
+        BottomNavItem.Item,
+        BottomNavItem.Rune,
     )
     val visible = items.any { item ->
         currentRoute == item.route
